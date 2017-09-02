@@ -2,6 +2,11 @@
 {
 	public interface IModule
 	{
-		void Run();
+		void Run(IRegistrationContext context);
+	}
+
+	public interface IModule<in T> : IModule
+	{
+		void Something(IRegistrationContext<T> action);
 	}
 }

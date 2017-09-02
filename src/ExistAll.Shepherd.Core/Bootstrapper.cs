@@ -23,20 +23,28 @@ namespace ExistAll.Shepherd.Core
 		{
 			var types = assemblyCollection.GetAllTypes().ToArray();
 			var assemblies = assemblyCollection.Assemblies.ToArray();
-			
+
+			IInitializingContext<T> context = CreateInitializingContext(_container, types, assemblies);
+
 			modules.ForEach(x =>
 			{
-				x.Run(IInitializingContext );
+				//x.Run(context);
 			});
 
 			return null;
 		}
+
+		protected abstract IInitializingContext<T> CreateInitializingContext(T container, Type[] types, Assembly[] assemblies);
 	}
 
-	public interface IInitializingContext<T>
+	public interface IInitializingContext
 	{
 		IEnumerable<Assembly> Assemblies { get; }
 		IEnumerable<Type> Types { get; }
+	}
+
+	public interface IInitializingContext<out T> : IInitializingContext
+	{
 		T Container { get; }
 	}
 
