@@ -6,36 +6,36 @@ using System.Reflection;
 
 namespace ExistAll.Shepherd.Core
 {
-	public abstract class Shepherd<T>
-	{
-		private readonly T _container;
+	//public abstract class Shepherd<T>
+	//{
+	//	private readonly T _container;
 
-		//public IServiceRegistrator ServiceRegistrator { get; set; } = new WindsorServiceRegistrator();
+	//	//public IServiceRegistrator ServiceRegistrator { get; set; } = new WindsorServiceRegistrator();
 
-		protected Shepherd(T container)
-		{
-			_container = container;
-		}
+	//	protected Shepherd(T container)
+	//	{
+	//		_container = container;
+	//	}
 
-		public Options Options { get; }
+	//	public Options Options { get; }
 
-		public IServiceResolver Initialize(AssemblyCollection assemblyCollection, ModuleCollection modules)
-		{
-			var types = assemblyCollection.GetAllTypes().ToArray();
-			var assemblies = assemblyCollection.Assemblies.ToArray();
+	//	public IServiceResolver Initialize(AssemblyCollection assemblyCollection, ModuleCollection modules)
+	//	{
+	//		var types = assemblyCollection.GetAllTypes().ToArray();
+	//		var assemblies = assemblyCollection.Assemblies.ToArray();
 
-			IInitializingContext<T> context = CreateInitializingContext(_container, types, assemblies);
+	//		IInitializingContext<T> context = CreateInitializingContext(_container, types, assemblies);
 
-			modules.ForEach(x =>
-			{
-				//x.Run(context);
-			});
+	//		modules.ForEach(x =>
+	//		{
+	//			//x.Run(context);
+	//		});
 
-			return null;
-		}
+	//		return null;
+	//	}
 
-		protected abstract IInitializingContext<T> CreateInitializingContext(T container, Type[] types, Assembly[] assemblies);
-	}
+	//	protected abstract IInitializingContext<T> CreateInitializingContext(T container, Type[] types, Assembly[] assemblies);
+	//}
 
 	public interface IInitializingContext
 	{
@@ -62,4 +62,5 @@ namespace ExistAll.Shepherd.Core
 			Container = container;
 		}
 	}
+
 }

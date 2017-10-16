@@ -1,12 +1,11 @@
-﻿namespace ExistAll.Shepherd.Core
+﻿using System;
+using SimpleInjector;
+
+namespace ExistAll.Shepherd.Core
 {
 	public interface IShepherdOptions
 	{
-		object Container { get; }
-	}
-
-	public interface IShepherdOptions<out T> : IShepherdOptions
-	{
-		T Container { get; }
+		void ConfigureContainerOptions(Action<ContainerOptions> options);
+		ITypeMatcher TypeMatcher { get; set; }
 	}
 }

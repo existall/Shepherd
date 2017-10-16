@@ -2,6 +2,6 @@
 {
 	public interface IShepherd
 	{
-		IServiceResolver Herd(AssemblyCollection assemblies, ModuleCollection collection);
+		IServiceResolver Herd();
 	}
 }

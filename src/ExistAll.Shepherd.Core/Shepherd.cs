@@ -2,16 +2,27 @@
 {
 	public class Shepherd : IShepherd
 	{
-		private readonly IShepherdOptions _shepherdOptions;
+		public AssemblyCollection Assemblies { get; internal set; } = new AssemblyCollection();
+		public ModuleCollection Modules { get; internal set; } = new ModuleCollection();
+		public IShepherdOptions Options { get; internal set; } = new DefaultShepherdOptions();
 
-		internal Shepherd(IShepherdOptions shepherdOptions)
+		internal Shepherd()
 		{
-			_shepherdOptions = shepherdOptions;
+			
 		}
 
-		public IServiceResolver Herd(AssemblyCollection assemblies, ModuleCollection collection)
+		public IServiceResolver Herd()
 		{
+			var allTypes = Assemblies.GetAllTypes();
+
+			Options.
+
 			return null;
 		}
+	}
+
+	internal interface IOptionsValidator
+	{
+		
 	}
 }
