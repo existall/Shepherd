@@ -1,7 +1,17 @@
-﻿namespace ExistAll.Shepherd.Core
+﻿using System;
+using SimpleInjector;
+
+namespace ExistAll.Shepherd.Core
 {
-	internal class DefaultShepherdOptions : IShepherdOptions
+	public class ShepherdOptions : IShepherdOptions
 	{
-		public object Container { get; internal set; }
+		internal Action<ContainerOptions> ContainerConfiguration { get; set; }
+
+		public void ConfigureContainerOptions(Action<ContainerOptions> options)
+		{
+			ContainerConfiguration = options;	
+		}
+
+		public ITypeMatcher TypeMatcher { get; set; }
 	}
 }

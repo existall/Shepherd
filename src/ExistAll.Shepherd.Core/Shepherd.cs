@@ -5,7 +5,7 @@
 		private readonly IOptionsValidator _optionsValidator;
 		public AssemblyCollection Assemblies { get; internal set; } = new AssemblyCollection();
 		public ModuleCollection Modules { get; internal set; } = new ModuleCollection();
-		public IShepherdOptions Options { get; internal set; } = new DefaultShepherdOptions();
+		public IShepherdOptions Options { get; internal set; } = new ShepherdOptions();
 
 		public Shepherd()
 			: this(new OptionsValidator())
