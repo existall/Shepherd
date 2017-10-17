@@ -63,4 +63,24 @@ namespace ExistAll.Shepherd.Core
 		}
 	}
 
+	public interface IModuleContext
+	{
+		IEnumerable<Assembly> Assemblies { get; }
+		IEnumerable<Type> Types { get; }
+		Container Container { get; }
+	}
+
+	internal class ModuleContext : IModuleContext
+	{
+		public IEnumerable<Assembly> Assemblies { get; }
+		public IEnumerable<Type> Types { get; }
+		public Container Container { get; }
+
+		protected ModuleContext(IEnumerable<Assembly> assemblies, IEnumerable<Type> types, Container container)
+		{
+			Assemblies = assemblies;
+			Types = types;
+			Container = container;
+		}
+	}
 }

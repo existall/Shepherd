@@ -24,6 +24,8 @@
 
 			var allTypes = Assemblies.GetAllTypes();
 
+			var context = new ModuleContext();
+
 			var filterTypes = Options.TypeMatcher.FilterTypes(allTypes);
 
 			var typesIndex = Options.TypeMatcher.MapTypes(filterTypes);
