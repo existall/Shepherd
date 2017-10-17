@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
 using System.Reflection;
+using SimpleInjector;
 
 namespace ExistAll.Shepherd.Core
 {
@@ -76,7 +75,9 @@ namespace ExistAll.Shepherd.Core
 		public IEnumerable<Type> Types { get; }
 		public Container Container { get; }
 
-		protected ModuleContext(IEnumerable<Assembly> assemblies, IEnumerable<Type> types, Container container)
+		public ModuleContext(IEnumerable<Assembly> assemblies,
+			IEnumerable<Type> types,
+			Container container)
 		{
 			Assemblies = assemblies;
 			Types = types;

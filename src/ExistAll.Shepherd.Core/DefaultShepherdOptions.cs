@@ -5,13 +5,7 @@ namespace ExistAll.Shepherd.Core
 {
 	public class ShepherdOptions : IShepherdOptions
 	{
-		internal Action<ContainerOptions> ContainerConfiguration { get; set; }
-
-		public void ConfigureContainerOptions(Action<ContainerOptions> options)
-		{
-			ContainerConfiguration = options;	
-		}
-
+		public IContainerOptionsConfiguration ConfigureContainerOptions { get; set; }
 		public ITypeMatcher TypeMatcher { get; set; }
 	}
 }
