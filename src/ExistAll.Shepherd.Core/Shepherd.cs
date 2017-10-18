@@ -9,6 +9,7 @@ namespace ExistAll.Shepherd.Core
 	{
 		private readonly IOptionsValidator _optionsValidator;
 		private readonly IModulesExecutor _modulesExecutor;
+		private readonly IDeepServiceRegistrator _deepServiceRegistrator;
 
 		private Container Container { get; }
 
@@ -17,17 +18,21 @@ namespace ExistAll.Shepherd.Core
 		public IShepherdOptions Options { get; internal set; } = new ShepherdOptions();
 
 		public Shepherd(Container container = null)
-			: this(new OptionsValidator(), new ModuleExecutor())
+			: this(new OptionsValidator(),
+				  new ModuleExecutor(),
+				  new DeepServiceRegistrator())
 		{
 			if (container == null)
 				Container = new Container();
 		}
 
 		internal Shepherd(IOptionsValidator optionsValidator,
-			IModulesExecutor modulesExecutor)
+			IModulesExecutor modulesExecutor,
+			IDeepServiceRegistrator deepServiceRegistrator)
 		{
 			_optionsValidator = optionsValidator;
 			_modulesExecutor = modulesExecutor;
+			_deepServiceRegistrator = deepServiceRegistrator;
 		}
 
 		public Container Herd()
@@ -42,6 +47,8 @@ namespace ExistAll.Shepherd.Core
 			_modulesExecutor.ExecuteModules(Modules, Container, Assemblies.Assemblies.ToArray(), allTypes);
 
 			var typeIndex = GetTypeIndex(allTypes);
+
+			_deepServiceRegistrator.Register();
 
 			return null;
 		}
