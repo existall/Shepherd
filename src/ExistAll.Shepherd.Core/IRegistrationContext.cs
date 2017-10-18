@@ -8,47 +8,71 @@ using SimpleInjector;
 
 namespace ExistAll.Shepherd.Core
 {
+	public interface IRegistrationActionCandidate
+	{
+		bool ShouldRegister(ICandidateDescriptor descriptor);
+		void Register(IRegistrationContext context, Container container);
+	}
+
+	public interface ICandidateDescriptor
+	{
+		Type ServiceType { get; }
+		IEnumerable<Type> ImplementationTypes { get; }
+	}
+
+	public interface IRegistrationContext
+	{
+		Type ServiceType { get; }
+		IEnumerable<Type> ImplementationTypes { get; }
+		IEnumerable<Assembly> Assemblies { get; }
+	}
+
+
+	public class SkipRegistrationAttribute : Attribute
+	{
+		
+	}
+
+	public interface ISkipRegistration : IRegistrationActionCandidate
+	{ }
+
+	public interface IGenericRegistration : IRegistrationActionCandidate
+	{
+	
+	}
+
+
+
+	public class SkipRegistrationAction : ISkipRegistration
+	{
+		public virtual bool ShouldRegister(ICandidateDescriptor descriptor)
+		{
+			return descriptor.ServiceType.GetCustomAttribute<SkipRegistrationAttribute>() != null;
+		}
+
+		public virtual void Register(IRegistrationContext context, Container container)
+		{
+		}
+	}
+
+	public class GenericRegistration : IGenericRegistration
+	{
+		public bool ShouldRegister(ICandidateDescriptor descriptor)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void Register(IRegistrationContext context, Container container)
+		{
+			throw new NotImplementedException();
+		}
+	}
+	
+
 	public class SimpleInjectorServiceRegistrator 
 	{
-		private readonly List<Type> _initializers = new List<Type>();
 
-		public void RegisterServices()
-		{
-			object castedContext = null;
 
-			var mapper = new Dictionary<Type, List<Type>>();
-
-			context.TypeCollection
-				.Where(x => x.IsInterface)
-				.Where(x => typeRegistrationFilters.All(filter => filter.OnTypeEnumeration(new EnumerationContext(x))))
-				.ForEach(x => mapper.Add(x, new List<Type>()));
-
-			context.TypeCollection.Where(x => !x.IsInterface && !x.IsAbstract)
-				.ForEach(typeCandidate => {
-					var interfaces = typeCandidate.GetInterfaces().ToArray();
-
-					if (!interfaces.Any())
-						return;
-
-					foreach (var @interface in interfaces)
-					{
-						if (mapper.ContainsKey(@interface))
-							mapper[@interface].Add(typeCandidate);
-					}
-				});
-
-			var registrations = mapper.Where(x => typeRegistrationFilters
-			.All(filter => filter.OnTypeEnumeration(new EnumerationContext(x.Key))))
-				.Select(i => new Registration(i.Key, i.Value.ToArray()))
-				.ToArray();
-
-			foreach (var reg in registrations)
-			{
-				HandleRegistration(reg, container, castedContext.Assemblies);
-			}
-
-			container.Register(typeof(IInitializerTypeProvider), () => new InitializerTypeProvider(_initializers));
-		}
 
 		private void HandleRegistration(Registration reg, Container container, Assembly[] assemblies)
 		{
