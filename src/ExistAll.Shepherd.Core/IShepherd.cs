@@ -1,7 +1,9 @@
-﻿namespace ExistAll.Shepherd.Core
+﻿using SimpleInjector;
+
+namespace ExistAll.Shepherd.Core
 {
 	public interface IShepherd
 	{
-		IServiceResolver Herd();
+		Container Herd();
 	}
 }

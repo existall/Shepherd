@@ -36,39 +36,6 @@ namespace ExistAll.Shepherd.Core
 	//	protected abstract IInitializingContext<T> CreateInitializingContext(T container, Type[] types, Assembly[] assemblies);
 	//}
 
-	public interface IInitializingContext
-	{
-		IEnumerable<Assembly> Assemblies { get; }
-		IEnumerable<Type> Types { get; }
-	}
-
-	public interface IInitializingContext<out T> : IInitializingContext
-	{
-		T Container { get; }
-	}
-
-	public abstract class InitializingContext<T> : IInitializingContext<T>
-	{
-		public IEnumerable<Assembly> Assemblies { get; }
-		public IEnumerable<Type> Types { get; }
-
-		public T Container { get; }
-
-		protected InitializingContext(IEnumerable<Assembly> assemblies, IEnumerable<Type> types, T container)
-		{
-			Assemblies = assemblies;
-			Types = types;
-			Container = container;
-		}
-	}
-
-	public interface IModuleContext
-	{
-		IEnumerable<Assembly> Assemblies { get; }
-		IEnumerable<Type> Types { get; }
-		Container Container { get; }
-	}
-
 	internal class ModuleContext : IModuleContext
 	{
 		public IEnumerable<Assembly> Assemblies { get; }

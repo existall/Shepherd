@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using SimpleInjector;
 
 namespace ExistAll.Shepherd.Core
@@ -6,6 +8,8 @@ namespace ExistAll.Shepherd.Core
 	public class Shepherd : IShepherd
 	{
 		private readonly IOptionsValidator _optionsValidator;
+		private readonly IModulesExecutor _modulesExecutor;
+
 		private Container Container { get; }
 
 		public AssemblyCollection Assemblies { get; internal set; } = new AssemblyCollection();
@@ -13,18 +17,20 @@ namespace ExistAll.Shepherd.Core
 		public IShepherdOptions Options { get; internal set; } = new ShepherdOptions();
 
 		public Shepherd(Container container = null)
-			: this(new OptionsValidator())
+			: this(new OptionsValidator(), new ModuleExecutor())
 		{
-			if(container == null)
+			if (container == null)
 				Container = new Container();
 		}
 
-		internal Shepherd(IOptionsValidator optionsValidator)
+		internal Shepherd(IOptionsValidator optionsValidator,
+			IModulesExecutor modulesExecutor)
 		{
 			_optionsValidator = optionsValidator;
+			_modulesExecutor = modulesExecutor;
 		}
 
-		public IServiceResolver Herd()
+		public Container Herd()
 		{
 			_optionsValidator.ValidateOptions(Options);
 
@@ -33,15 +39,20 @@ namespace ExistAll.Shepherd.Core
 			var allTypes = Assemblies.GetAllTypes()
 				.ToArray();
 
-			var context = new ModuleContext(Assemblies.Assemblies, allTypes, Container);
+			_modulesExecutor.ExecuteModules(Modules, Container, Assemblies.Assemblies.ToArray(), allTypes);
 
-			// run all modules here.!
+			var typeIndex = GetTypeIndex(allTypes);
 
+			return null;
+		}
+
+		private IEnumerable<KeyValuePair<Type, IEnumerable<Type>>> GetTypeIndex(Type[] allTypes)
+		{
 			var filterTypes = Options.TypeMatcher.FilterTypes(allTypes);
 
 			var typesIndex = Options.TypeMatcher.MapTypes(filterTypes);
 
-			return null;
+			return typesIndex;
 		}
 	}
 }

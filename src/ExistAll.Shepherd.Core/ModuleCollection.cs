@@ -2,6 +2,6 @@
 
 namespace ExistAll.Shepherd.Core
 {
-	public class ModuleCollection : List<IModule>
+	public class ModuleCollection : List<IConfigurationModule>
 	{ }
 }
