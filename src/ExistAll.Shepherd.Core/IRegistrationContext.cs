@@ -4,6 +4,7 @@ using System.ComponentModel.Design;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using ExistAll.Shepherd.Core.Resources;
 using SimpleInjector;
 
 namespace ExistAll.Shepherd.Core
@@ -29,25 +30,24 @@ namespace ExistAll.Shepherd.Core
 
 
 	public class SkipRegistrationAttribute : Attribute
-	{
-		
-	}
+	{ }
 
 	public interface ISkipRegistration : IRegistrationActionCandidate
 	{ }
 
 	public interface IGenericRegistration : IRegistrationActionCandidate
-	{
-	
-	}
-
-
+	{ }
 
 	public class SkipRegistrationAction : ISkipRegistration
 	{
+		public Type AttributeType { get; set; } = typeof(SkipRegistrationAttribute);
+
 		public virtual bool ShouldRegister(ICandidateDescriptor descriptor)
 		{
-			return descriptor.ServiceType.GetCustomAttribute<SkipRegistrationAttribute>() != null;
+			if (AttributeType == null)
+				throw new AutoRegistrationException(ExceptionMessages.SkipRegistrationMessage);
+
+			return descriptor.ServiceType.GetCustomAttribute(AttributeType) != null;
 		}
 
 		public virtual void Register(IRegistrationContext context, Container container)
@@ -67,9 +67,9 @@ namespace ExistAll.Shepherd.Core
 			throw new NotImplementedException();
 		}
 	}
-	
 
-	public class SimpleInjectorServiceRegistrator 
+
+	public class SimpleInjectorServiceRegistrator
 	{
 
 
@@ -167,5 +167,4 @@ namespace ExistAll.Shepherd.Core
 			});
 		}
 	}
-
 }
