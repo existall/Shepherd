@@ -44,13 +44,15 @@ namespace ExistAll.Shepherd.Core
 			var allTypes = Assemblies.GetAllTypes()
 				.ToArray();
 
-			_modulesExecutor.ExecuteModules(Modules, Container, Assemblies.Assemblies.ToArray(), allTypes);
+			var assemblies = Assemblies.Assemblies.ToArray();
+
+			_modulesExecutor.ExecuteModules(Modules, Container, assemblies, allTypes);
 
 			var typeIndex = GetTypeIndex(allTypes);
 
-			_deepServiceRegistrator.Register();
+			_deepServiceRegistrator.Register(Container, Options, typeIndex, assemblies);
 
-			return null;
+			return Container;
 		}
 
 		private IEnumerable<KeyValuePair<Type, IEnumerable<Type>>> GetTypeIndex(Type[] allTypes)
