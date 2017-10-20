@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
@@ -6,21 +7,29 @@ namespace ExistsForAll.Shepherd.SimpleInjector.Extensions
 {
 	public static class AssemblyCollectionExtensions
 	{
-		public static AssemblyCollection AddPublicTypesAssemblies(this AssemblyCollection target, params Assembly[] assemblies)
+		public static AssemblyCollection AddPublicTypesAssemblies(this AssemblyCollection target, Assembly assembly, params Assembly[] assemblies)
 		{
-			AddAssemblies(target, assemblies, x => new PublicTypesOnlyAssemblyLoader(x));
+			AddAssemblies(target, x => new PublicTypesOnlyAssemblyLoader(x), JoinAssemblies(assembly, assemblies));
 
 			return target;
 		}
 
-		public static AssemblyCollection AddAllTypeAssemblies(this AssemblyCollection target, params Assembly[] assemblies)
+		public static AssemblyCollection AddAllTypeAssemblies(this AssemblyCollection target, Assembly assembly, params Assembly[] assemblies)
 		{
-			AddAssemblies(target, assemblies, x => new AllTypesAssemblyLoader(x));
+			AddAssemblies(target, x => new AllTypesAssemblyLoader(x), JoinAssemblies(assembly, assemblies));
 
 			return target;
 		}
 
-		private static void AddAssemblies(AssemblyCollection assemblyCollection, Assembly[] assemblies, Func<Assembly, IAssemblyLoader> action)
+		private static IEnumerable<Assembly> JoinAssemblies(Assembly assembly, params Assembly[] assemblies)
+		{
+			return new List<Assembly>(assemblies)
+			{
+				assembly
+			};
+		}
+
+		private static void AddAssemblies(AssemblyCollection assemblyCollection, Func<Assembly, IAssemblyLoader> action, IEnumerable<Assembly> assemblies)
 		{
 			Guard.NullArgument(assemblyCollection, nameof(assemblyCollection));
 

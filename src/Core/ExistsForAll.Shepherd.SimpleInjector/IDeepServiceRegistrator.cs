@@ -10,7 +10,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 	{
 		void Register(Container container,
 			IShepherdOptions options,
-			IEnumerable<KeyValuePair<Type, IEnumerable<Type>>> typeIndex,
+			IEnumerable<ServiceTypeMap> typeIndex,
 			Assembly[] assemblies);
 	}
 
@@ -18,7 +18,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 	{
 		public void Register(Container container,
 			IShepherdOptions options,
-			IEnumerable<KeyValuePair<Type, IEnumerable<Type>>> typeIndex,
+			IEnumerable<ServiceTypeMap> typeIndex,
 			Assembly[] assemblies)
 		{
 			var actions = new List<IRegistrationActionCandidate>
@@ -29,12 +29,11 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 				options.SingleServiceRegistration
 			};
 
-
 			foreach (var index in typeIndex)
 			{
-				var candidateDescriptor = new CandidateDescriptor(index.Key, index.Value);
+				var candidateDescriptor = new CandidateDescriptor(index.ServiceType, index.ImplementationTypes);
 
-				if (!options.SkipRegistration.ShouldRegister(candidateDescriptor))
+				if (options.SkipRegistration.ShouldSkipAutoRegistration(candidateDescriptor))
 				{
 					continue;
 				}

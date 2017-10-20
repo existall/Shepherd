@@ -48,20 +48,11 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 
 			_modulesExecutor.ExecuteModules(Modules, Container, assemblies, allTypes);
 
-			var typeIndex = GetTypeIndex(allTypes);
+			var typeIndex = Options.TypeMatcher.MapTypes(allTypes);
 
 			_deepServiceRegistrator.Register(Container, Options, typeIndex, assemblies);
 
 			return Container;
-		}
-
-		private IEnumerable<KeyValuePair<Type, IEnumerable<Type>>> GetTypeIndex(Type[] allTypes)
-		{
-			var filterTypes = Options.TypeMatcher.FilterTypes(allTypes);
-
-			var typesIndex = Options.TypeMatcher.MapTypes(filterTypes);
-
-			return typesIndex;
 		}
 	}
 }
