@@ -11,7 +11,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 		public IDecoratorRegistration DecoratorRegistration { get; set; } = new DecoratorRegistration();
 		public ICollectionRegistration CollectionRegistration { get; set; } = new CollectionRegistration();
 		public ISingleServiceRegistration SingleServiceRegistration { get; set; } = new SingleServiceRegistration();
-
+		
 		public ShepherdOptions()
 		{
 			GenericRegistration = new GenericRegistration(this);

@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\ExistsForAll.Shepherd.SimpleInjector\ExistsForAll.Shepherd.SimpleInjector.csproj" />
+    <ProjectReference Include="..\..\ExistsForAll.Shepherd.SimpleInjector.Experimental\ExistsForAll.Shepherd.SimpleInjector.Experimental.csproj" />
   </ItemGroup>
 
 </Project>

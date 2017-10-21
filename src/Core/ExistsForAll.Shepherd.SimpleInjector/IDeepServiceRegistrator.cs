@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Reflection;
 using ExistsForAll.Shepherd.SimpleInjector.RegistrationActions;
 using SimpleInjector;
@@ -42,9 +41,10 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 			}
 		}
 
-		private void IterateActions(List<IRegistrationActionCandidate> actions,
+		private static void IterateActions(List<IRegistrationActionCandidate> actions,
 			ICandidateDescriptor candidateDescriptor,
-			Container container, Assembly[] assemblies)
+			Container container,
+			Assembly[] assemblies)
 		{
 			foreach (var action in actions)
 			{

@@ -5,11 +5,17 @@
 		void ValidateOptions(IShepherdOptions options);
 	}
 
-	class OptionsValidator : IOptionsValidator
+	internal class OptionsValidator : IOptionsValidator
 	{
 		public void ValidateOptions(IShepherdOptions options)
 		{
-			
+			Guard.NullArgument(options.DecoratorRegistration, nameof(options.DecoratorRegistration));
+			Guard.NullArgument(options.CollectionRegistration, nameof(options.CollectionRegistration));
+			Guard.NullArgument(options.ConfigureContainerOptions, nameof(options.ConfigureContainerOptions));
+			Guard.NullArgument(options.GenericRegistration, nameof(options.GenericRegistration));
+			Guard.NullArgument(options.SingleServiceRegistration, nameof(options.SingleServiceRegistration));
+			Guard.NullArgument(options.SkipRegistration, nameof(options.SkipRegistration));
+			Guard.NullArgument(options.TypeMatcher, nameof(options.TypeMatcher));
 		}
 	}
 }
