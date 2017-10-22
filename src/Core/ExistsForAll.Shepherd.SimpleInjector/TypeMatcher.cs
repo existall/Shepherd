@@ -13,7 +13,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 
 		public IEnumerable<ServiceTypeMap> MapTypes(IEnumerable<Type> applicationTypes)
 		{
-			if(TypeFilter == null)
+			if (TypeFilter == null)
 				throw new AutoRegistrationException(ExceptionMessages.MissingTypeFilterMessage);
 
 			var types = applicationTypes.Where(x => TypeFilter(x)).ToArray();
@@ -34,7 +34,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 					}
 				});
 
-			types.Where(x => x.GetTypeInfo().IsClass && !x.GetTypeInfo().IsAbstract)
+			types.Where(x => x.IsClass() && !x.IsAbstract())
 				.ForEach(typeCandidate =>
 				{
 					foreach (var @interface in typeCandidate.GetTypeInfo().GetInterfaces())
@@ -42,18 +42,18 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 						if (@interface.IsGenericType())
 						{
 							var @class = genericMapper.First(x => x.Key.GetGenericTypeDefinition() == @interface.GetGenericTypeDefinition());
+
 							@class.Value.Add(typeCandidate);
 							continue;
 						}
 
 						if (mapper.ContainsKey(@interface))
 							mapper[@interface].Add(typeCandidate);
-
 					}
 				});
 
 			return genericMapper.Concat(mapper)
-				.Select(x => new ServiceTypeMap(x.Key,x.Value))
+				.Select(x => new ServiceTypeMap(x.Key, x.Value))
 				.ToArray();
 		}
 	}

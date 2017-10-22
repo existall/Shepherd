@@ -1,6 +1,6 @@
 ﻿namespace ExistsForAll.Shepherd.SimpleInjector
 {
-	public interface IConfigurationModule
+	public interface IModule
 	{
 		void Configure(IModuleContext context);
 	}
