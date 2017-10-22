@@ -9,11 +9,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{438B970D-B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A0EB46E4-DBE5-47F8-BFB7-6AACB3AD88B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExistsForAll.Shepherd.SimpleInjector", "Core\ExistsForAll.Shepherd.SimpleInjector\ExistsForAll.Shepherd.SimpleInjector.csproj", "{7FDD35E7-388E-4AF3-80E3-E8D283845788}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExistsForAll.Shepherd.SimpleInjector", "Core\ExistsForAll.Shepherd.SimpleInjector\ExistsForAll.Shepherd.SimpleInjector.csproj", "{7FDD35E7-388E-4AF3-80E3-E8D283845788}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExistsForAll.Shepherd.SimpleInjector.UnitTests", "tests\ExistsForAll.Shepherd.SimpleInjector.UnitTests\ExistsForAll.Shepherd.SimpleInjector.UnitTests.csproj", "{162CDC5B-5589-4ABC-8AA4-26ABBF25C47C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExistsForAll.Shepherd.SimpleInjector.UnitTests", "tests\ExistsForAll.Shepherd.SimpleInjector.UnitTests\ExistsForAll.Shepherd.SimpleInjector.UnitTests.csproj", "{162CDC5B-5589-4ABC-8AA4-26ABBF25C47C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExistsForAll.Shepherd.SimpleInjector.Experimental", "ExistsForAll.Shepherd.SimpleInjector.Experimental\ExistsForAll.Shepherd.SimpleInjector.Experimental.csproj", "{AAAEF6B8-C82B-4BD4-8190-7DEC9E1EAA6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExistsForAll.Shepherd.SimpleInjector.Experimental", "Core\ExistsForAll.Shepherd.SimpleInjector.Experimental\ExistsForAll.Shepherd.SimpleInjector.Experimental.csproj", "{0FB4E194-7E31-4A12-9D25-DC063E8C85C7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{162CDC5B-5589-4ABC-8AA4-26ABBF25C47C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{162CDC5B-5589-4ABC-8AA4-26ABBF25C47C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{162CDC5B-5589-4ABC-8AA4-26ABBF25C47C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AAAEF6B8-C82B-4BD4-8190-7DEC9E1EAA6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AAAEF6B8-C82B-4BD4-8190-7DEC9E1EAA6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AAAEF6B8-C82B-4BD4-8190-7DEC9E1EAA6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AAAEF6B8-C82B-4BD4-8190-7DEC9E1EAA6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FB4E194-7E31-4A12-9D25-DC063E8C85C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FB4E194-7E31-4A12-9D25-DC063E8C85C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FB4E194-7E31-4A12-9D25-DC063E8C85C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FB4E194-7E31-4A12-9D25-DC063E8C85C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -40,7 +40,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{7FDD35E7-388E-4AF3-80E3-E8D283845788} = {438B970D-B358-4808-B300-06E751728CDA}
 		{162CDC5B-5589-4ABC-8AA4-26ABBF25C47C} = {A0EB46E4-DBE5-47F8-BFB7-6AACB3AD88B4}
-		{AAAEF6B8-C82B-4BD4-8190-7DEC9E1EAA6A} = {438B970D-B358-4808-B300-06E751728CDA}
+		{0FB4E194-7E31-4A12-9D25-DC063E8C85C7} = {438B970D-B358-4808-B300-06E751728CDA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8616ED98-2EF3-4147-8359-D19461B35672}

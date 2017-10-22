@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using ExistsForAll.Shepherd.SimpleInjector.Extensions;
 using ExistsForAll.Shepherd.SimpleInjector.RegistrationActions;
 using ExistsForAll.Shepherd.SimpleInjector.Resources;
 
@@ -20,7 +21,13 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 			if (AttributeType == null)
 				throw new AutoRegistrationException(ExceptionMessages.SkipRegistrationMessage);
 
-			return descriptor.ServiceType.GetTypeInfo().GetCustomAttribute(AttributeType) != null || !descriptor.ImplementationTypes.Any();
+			if (descriptor.ServiceType.GetTypeInfo().GetCustomAttribute(AttributeType) != null)
+				return true;
+
+			if (descriptor.ServiceType.IsGeneric())
+				return false;
+
+			return !descriptor.ImplementationTypes.Any();
 		}
 	}
 }

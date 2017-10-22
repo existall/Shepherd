@@ -16,7 +16,28 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 			var container = shepherd.Herd();
 			//container.Verify();
 
-			//var allInstances = container.GetInstance<IC>();
+			var allInstances = container.GetInstance<IC>();
+		}
+
+
+		interface IV
+		{
+			
+		}
+
+		interface IV<T> : IV
+		{
+			
+		}
+
+		class V : IV<int>
+		{
+			
+		}
+
+		class V1 : IV<string>
+		{
+			
 		}
 
 
@@ -29,20 +50,28 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 		{
 		}
 
-		//interface IC
-		//{
-			
-		//}
 
-		//class C : IC
-		//{
-		//	private readonly IZx<int> _z;
+		interface IC
+		{
+		
+		}
 
-		//	public C(IZx<int> z)
-		//	{
-		//		_z = z;
-		//	}
-		//}
+		class C : IC
+		{
+			private readonly IZx<int> _z;
+			private readonly IEnumerable<IV> _enumerable;
+
+			public C(IZx<int> z, IEnumerable<IV> enumerable)
+			{
+				_z = z;
+				_enumerable = enumerable;
+
+				foreach (var x in _enumerable)
+				{
+					
+				}
+			}
+		}
 
 		//interface IZ
 		//{
