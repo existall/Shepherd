@@ -1,4 +1,7 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using ExistsForAll.Shepherd.SimpleInjector.Extensions;
 using Xunit;
 
@@ -19,61 +22,157 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 			var allInstances = container.GetInstance<IC>();
 		}
 
-
-		interface IV
+		[Fact]
+		public void XX()
 		{
-			
-		}
+			var classesImplementingAnInterface = GetClassesImplementingAnInterface(this.GetType().Assembly, typeof(IZx<>));
 
-		interface IV<T> : IV
-		{
-			
-		}
 
-		class V : IV<int>
-		{
-			
-		}
-
-		class V1 : IV<string>
-		{
-			
 		}
 
 
-		interface IZx<T>
+		///<summary>Read all classes in an assembly that implement an interface (generic, or not generic)</summary>
+		//
+		// some references
+		// return all types implementing an interface
+		// http://stackoverflow.com/questions/26733/getting-all-types-that-implement-an-interface/12602220#12602220
+		// http://haacked.com/archive/2012/07/23/get-all-types-in-an-assembly.aspx/
+		// http://stackoverflow.com/questions/7889228/how-to-prevent-reflectiontypeloadexception-when-calling-assembly-gettypes
+		// return all types implementing a generic interface
+		// http://stackoverflow.com/questions/33694960/find-all-types-implementing-a-certain-generic-interface-with-specific-t-type
+		// http://stackoverflow.com/questions/8645430/get-all-types-implementing-specific-open-generic-type
+		// http://stackoverflow.com/questions/1121834/finding-out-if-a-type-implements-a-generic-interface
+		// http://stackoverflow.com/questions/5849210/net-getting-all-implementations-of-a-generic-interface
+		public static Tuple<bool, IList<Type>> GetClassesImplementingAnInterface(Assembly assemblyToScan,
+			Type implementedInterface)
 		{
-			
-		}
+			if (assemblyToScan == null)
+				return Tuple.Create(false, (IList<Type>) null);
 
-		private class Zx<T> : IZx<T>
-		{
-		}
+			if (implementedInterface == null || !implementedInterface.IsInterface)
+				return Tuple.Create(false, (IList<Type>) null);
 
+			IEnumerable<Type> typesInTheAssembly;
 
-		interface IC
-		{
-		
-		}
-
-		class C : IC
-		{
-			private readonly IZx<int> _z;
-			private readonly IEnumerable<IV> _enumerable;
-
-			public C(IZx<int> z, IEnumerable<IV> enumerable)
+			try
 			{
-				_z = z;
-				_enumerable = enumerable;
+				typesInTheAssembly = assemblyToScan.GetTypes();
+			}
+			catch (ReflectionTypeLoadException e)
+			{
+				typesInTheAssembly = e.Types.Where(t => t != null);
+			}
 
-				foreach (var x in _enumerable)
+			IList<Type> classesImplementingInterface = new List<Type>();
+
+			// if the interface is a generic interface
+			if (implementedInterface.IsGenericType)
+			{
+				foreach (var typeInTheAssembly in typesInTheAssembly)
 				{
-					
+					if (typeInTheAssembly.IsClass)
+					{
+						var typeInterfaces = typeInTheAssembly.GetInterfaces();
+						foreach (var typeInterface in typeInterfaces)
+						{
+							if (typeInterface.IsGenericType)
+							{
+								var typeGenericInterface = typeInterface.GetGenericTypeDefinition();
+								var implementedGenericInterface = implementedInterface.GetGenericTypeDefinition();
+
+								if (typeGenericInterface == implementedGenericInterface)
+								{
+									classesImplementingInterface.Add(typeInTheAssembly);
+								}
+							}
+						}
+					}
 				}
 			}
+			else
+			{
+				foreach (var typeInTheAssembly in typesInTheAssembly)
+				{
+					if (typeInTheAssembly.IsClass)
+					{
+						// if the interface is a non-generic interface
+						if (implementedInterface.IsAssignableFrom(typeInTheAssembly))
+						{
+							classesImplementingInterface.Add(typeInTheAssembly);
+						}
+					}
+				}
+			}
+			return Tuple.Create(true, classesImplementingInterface);
 		}
 
-		//interface IZ
+
+	}
+
+
+
+
+	interface IV
+	{
+
+	}
+
+	interface IV<T> : IV
+	{
+
+	}
+
+	class V : IV<int>
+	{
+
+	}
+
+	class V1 : IV<string>
+	{
+
+	}
+
+	class V12 : IV<string>
+	{
+
+	}
+
+
+	interface IZx<T>
+	{
+
+	}
+
+	class Zx<T> : IZx<T>
+	{
+	}
+
+
+	interface IC
+	{
+
+	}
+
+	class C : IC
+	{
+		private readonly IZx<int> _z;
+		private readonly IEnumerable<IV> _enumerable;
+		private readonly IEnumerable<IV<string>> _vs;
+
+		public C(IZx<int> z, IEnumerable<IV> enumerable, IEnumerable<IV<string>> vs )
+		{
+			_z = z;
+			_enumerable = enumerable;
+			_vs = vs;
+
+			foreach (var x in _enumerable)
+			{
+
+			}
+		}
+	}
+}
+//interface IZ
 		//{
 
 		//}
@@ -111,5 +210,5 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 		//		_x = x;
 		//	}
 		//}
-	}
-}
+	
+

@@ -19,21 +19,41 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 			var types = applicationTypes.Where(x => TypeFilter(x)).ToArray();
 
 			var mapper = new Dictionary<Type, List<Type>>();
+			var genericMapper = new Dictionary<Type, List<Type>>();
 
 			types.Where(x => x.GetTypeInfo().IsInterface)
-				.ForEach(x => mapper.Add(x, new List<Type>()));
+				.ForEach(@interface =>
+				{
+					if (@interface.IsGenericType())
+					{
+						genericMapper.Add(@interface, new List<Type>());
+					}
+					else
+					{
+						mapper.Add(@interface, new List<Type>());
+					}
+				});
 
-			types.Where(x => !x.GetTypeInfo().IsInterface && !x.GetTypeInfo().IsAbstract)
+			types.Where(x => x.GetTypeInfo().IsClass && !x.GetTypeInfo().IsAbstract)
 				.ForEach(typeCandidate =>
 				{
 					foreach (var @interface in typeCandidate.GetTypeInfo().GetInterfaces())
 					{
+						if (@interface.IsGenericType())
+						{
+							var @class = genericMapper.First(x => x.Key.GetGenericTypeDefinition() == @interface.GetGenericTypeDefinition());
+							@class.Value.Add(typeCandidate);
+							continue;
+						}
+
 						if (mapper.ContainsKey(@interface))
 							mapper[@interface].Add(typeCandidate);
+
 					}
 				});
 
-			return  mapper.Select(x => new ServiceTypeMap(x.Key,x.Value))
+			return genericMapper.Concat(mapper)
+				.Select(x => new ServiceTypeMap(x.Key,x.Value))
 				.ToArray();
 		}
 	}
