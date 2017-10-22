@@ -9,7 +9,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.Extensions
 	{
 		public static AssemblyCollection AddPublicTypesAssemblies(this AssemblyCollection target, Assembly assembly, params Assembly[] assemblies)
 		{
-			AddAssemblies(target, x => new PublicTypesOnlyAssemblyLoader(x), JoinAssemblies(assembly, assemblies));
+			AddAssemblies(target, x => new PublicTypesAssemblyLoader(x), JoinAssemblies(assembly, assemblies));
 
 			return target;
 		}

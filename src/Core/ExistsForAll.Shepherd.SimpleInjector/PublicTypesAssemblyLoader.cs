@@ -4,9 +4,9 @@ using System.Reflection;
 
 namespace ExistsForAll.Shepherd.SimpleInjector
 {
-	public class PublicTypesOnlyAssemblyLoader : IAssemblyLoader
+	public class PublicTypesAssemblyLoader : IAssemblyLoader
 	{
-		public PublicTypesOnlyAssemblyLoader(Assembly assembly)
+		public PublicTypesAssemblyLoader(Assembly assembly)
 		{
 			Guard.NullArgument(assembly, nameof(assembly));
 			Assembly = assembly;
