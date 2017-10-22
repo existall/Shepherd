@@ -3,18 +3,18 @@ using System.Collections.Generic;
 
 namespace ExistsForAll.Shepherd.SimpleInjector.RegistrationActions
 {
-	public interface ICandidateDescriptor
+	public interface IServiceDescriptor
 	{
 		Type ServiceType { get; }
 		IEnumerable<Type> ImplementationTypes { get; }
 	}
 
-	internal struct CandidateDescriptor : ICandidateDescriptor
+	internal struct ServiceDescriptor : IServiceDescriptor
 	{
 		public Type ServiceType { get; }
 		public IEnumerable<Type> ImplementationTypes { get; }
 
-		public CandidateDescriptor(Type serviceType, IEnumerable<Type> implementationTypes)
+		public ServiceDescriptor(Type serviceType, IEnumerable<Type> implementationTypes)
 		{
 			ServiceType = serviceType;
 			ImplementationTypes = implementationTypes;

@@ -4,7 +4,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.RegistrationActions
 {
 	public interface IRegistrationActionCandidate
 	{
-		bool ShouldRegister(ICandidateDescriptor descriptor);
+		bool ShouldRegister(IServiceDescriptor descriptor);
 		void Register(IRegistrationContext context, Container container);
 	}
 }

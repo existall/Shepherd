@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
 using SimpleInjector;
 
 namespace ExistsForAll.Shepherd.SimpleInjector.RegistrationActions
@@ -12,13 +11,25 @@ namespace ExistsForAll.Shepherd.SimpleInjector.RegistrationActions
 	public class GenericRegistration : IGenericRegistration
 	{
 		private IShepherdOptions Options { get; }
-
+		private IRegistrationActionCandidate[] _actions;
 		public GenericRegistration(IShepherdOptions shepherdOptions)
 		{
 			Options = shepherdOptions;
+
+			_actions = ArrangeRegistrationOrder(Options);
 		}
 
-		public virtual bool ShouldRegister(ICandidateDescriptor descriptor)
+		private IRegistrationActionCandidate[] ArrangeRegistrationOrder(IShepherdOptions options)
+		{
+			var actions = new List<IRegistrationActionCandidate>()
+			{
+				Options.DecoratorRegistration,
+				Options.CollectionRegistration,
+				Options.SingleServiceRegistration
+			};
+		}
+
+		public virtual bool ShouldRegister(IServiceDescriptor descriptor)
 		{
 			return descriptor.ServiceType.GetTypeInfo().IsGenericType || descriptor.ServiceType.GetTypeInfo().ContainsGenericParameters;
 		}
@@ -29,14 +40,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.RegistrationActions
 					new TypesToRegisterOptions { IncludeGenericTypeDefinitions = true })
 				.ToArray();
 
-			var actions = new List<IRegistrationActionCandidate>()
-			{
-				Options.DecoratorRegistration,
-				Options.CollectionRegistration,
-				Options.SingleServiceRegistration
-			};
-
-			var candidateDescriptor = new CandidateDescriptor(context.ServiceType, supportedTypes);
+			var candidateDescriptor = new ServiceDescriptor(context.ServiceType, supportedTypes);
 
 			foreach (var action in actions)
 			{
@@ -46,29 +50,6 @@ namespace ExistsForAll.Shepherd.SimpleInjector.RegistrationActions
 					return;
 				}
 			}
-
-
-			//if(Options.DecoratorRegistration
-
-			//if (reg.Interface.HasAttribute<RegisterAllImplementationsAttribute>())
-			//{
-			//	container.RegisterCollection(reg.Interface, supportedtypes.Select(x => Lifestyle.Singleton.CreateRegistration(x, container)));
-			//}
-
-			//foreach (var imp in supportedtypes)
-			//{
-			//	container.RegisterSingleton(reg.Interface, imp);
-			//}			//if(Options.DecoratorRegistration
-
-			//if (reg.Interface.HasAttribute<RegisterAllImplementationsAttribute>())
-			//{
-			//	container.RegisterCollection(reg.Interface, supportedtypes.Select(x => Lifestyle.Singleton.CreateRegistration(x, container)));
-			//}
-
-			//foreach (var imp in supportedtypes)
-			//{
-			//	container.RegisterSingleton(reg.Interface, imp);
-			//}
 		}
 	}
 }

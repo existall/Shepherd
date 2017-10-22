@@ -12,7 +12,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.RegistrationActions
 
 	public class DecoratorRegistration : IDecoratorRegistration
 	{
-		public virtual bool ShouldRegister(ICandidateDescriptor descriptor)
+		public virtual bool ShouldRegister(IServiceDescriptor descriptor)
 		{
 			var count = descriptor.ImplementationTypes.Count();
 

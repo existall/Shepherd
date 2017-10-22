@@ -7,7 +7,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.RegistrationActions
 
 	public class SingleServiceRegistration : ISingleServiceRegistration
 	{
-		public virtual bool ShouldRegister(ICandidateDescriptor descriptor)
+		public virtual bool ShouldRegister(IServiceDescriptor descriptor)
 		{
 			return descriptor.ImplementationTypes.Count() == 1;
 		}

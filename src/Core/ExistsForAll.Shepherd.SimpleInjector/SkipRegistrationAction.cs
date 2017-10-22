@@ -9,14 +9,14 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 {
 	public interface ISkipRegistration
 	{
-		bool ShouldSkipAutoRegistration(ICandidateDescriptor descriptor);
+		bool ShouldSkipAutoRegistration(IServiceDescriptor descriptor);
 	}
 
 	public class SkipRegistrationAction : ISkipRegistration
 	{
 		public Type AttributeType { get; set; } = typeof(SkipRegistrationAttribute);
 
-		public virtual bool ShouldSkipAutoRegistration(ICandidateDescriptor descriptor)
+		public virtual bool ShouldSkipAutoRegistration(IServiceDescriptor descriptor)
 		{
 			if (AttributeType == null)
 				throw new AutoRegistrationException(ExceptionMessages.SkipRegistrationMessage);
