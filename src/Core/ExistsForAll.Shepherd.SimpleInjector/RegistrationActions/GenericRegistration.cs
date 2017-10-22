@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using ExistsForAll.Shepherd.SimpleInjector.Extensions;
 using SimpleInjector;
 
 namespace ExistsForAll.Shepherd.SimpleInjector.RegistrationActions
@@ -36,13 +37,15 @@ namespace ExistsForAll.Shepherd.SimpleInjector.RegistrationActions
 
 		public virtual void Register(IRegistrationContext context, Container container)
 		{
-			var supportedTypes = container.GetTypesToRegister(context.ServiceType, context.Assemblies,
-					new TypesToRegisterOptions { IncludeGenericTypeDefinitions = true })
+			var supportedTypes = container.GetTypesToRegister(
+				context.ServiceType,
+				context.Assemblies,
+				new TypesToRegisterOptions { IncludeGenericTypeDefinitions = true })
 				.ToArray();
 
-			var candidateDescriptor = new ServiceDescriptor(context.ServiceType, supportedTypes);
+			var candidateDescriptor = context.AsRegistrationContext();
 
-			foreach (var action in actions)
+			foreach (var action in _actions)
 			{
 				if (action.ShouldRegister(candidateDescriptor))
 				{
