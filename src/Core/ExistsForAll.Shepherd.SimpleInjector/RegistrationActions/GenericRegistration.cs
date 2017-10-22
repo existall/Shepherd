@@ -12,22 +12,23 @@ namespace ExistsForAll.Shepherd.SimpleInjector.RegistrationActions
 	public class GenericRegistration : IGenericRegistration
 	{
 		private IShepherdOptions Options { get; }
-		private IRegistrationActionCandidate[] _actions;
+		private readonly IEnumerable<IRegistrationActionCandidate> _actions;
 		public GenericRegistration(IShepherdOptions shepherdOptions)
 		{
 			Options = shepherdOptions;
-
 			_actions = ArrangeRegistrationOrder(Options);
 		}
 
-		private IRegistrationActionCandidate[] ArrangeRegistrationOrder(IShepherdOptions options)
+		private static IEnumerable<IRegistrationActionCandidate> ArrangeRegistrationOrder(IShepherdOptions options)
 		{
-			var actions = new List<IRegistrationActionCandidate>()
+			var actions = new List<IRegistrationActionCandidate>
 			{
-				Options.DecoratorRegistration,
-				Options.CollectionRegistration,
-				Options.SingleServiceRegistration
+				options.DecoratorRegistration,
+				options.CollectionRegistration,
+				options.SingleServiceRegistration
 			};
+
+			return actions;
 		}
 
 		public virtual bool ShouldRegister(IServiceDescriptor descriptor)
