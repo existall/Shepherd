@@ -7,7 +7,7 @@ using ExistsForAll.Shepherd.SimpleInjector.Resources;
 
 namespace ExistsForAll.Shepherd.SimpleInjector
 {
-	public class TypeMatcher : ITypeMatcher
+	public class ServiceIndexer : IServiceIndexer
 	{
 		public Predicate<Type> TypeFilter { get; set; } = type => true;
 

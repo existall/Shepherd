@@ -22,7 +22,8 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 		{
 			if (assemblyLoader == null) throw new ArgumentNullException(nameof(assemblyLoader));
 
-			ActionConstraint(() => {
+			ActionConstraint(() =>
+			{
 				_list.Add(assemblyLoader);
 				_assemblies.Add(assemblyLoader.Assembly);
 			});

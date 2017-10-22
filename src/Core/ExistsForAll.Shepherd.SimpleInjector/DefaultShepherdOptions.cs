@@ -5,7 +5,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 	public class ShepherdOptions : IShepherdOptions
 	{
 		public IContainerOptionsConfiguration ConfigureContainerOptions { get; set; } = new DefaultContainerOptionsConfiguration();
-		public ITypeMatcher TypeMatcher { get; set; } = new TypeMatcher();
+		public IServiceIndexer ServiceIndexer { get; set; } = new ServiceIndexer();
 		public ISkipRegistration SkipRegistration { get; set; } = new SkipRegistrationAction();
 		public IGenericRegistration GenericRegistration { get; set; }
 		public IDecoratorRegistration DecoratorRegistration { get; set; } = new DecoratorRegistration();

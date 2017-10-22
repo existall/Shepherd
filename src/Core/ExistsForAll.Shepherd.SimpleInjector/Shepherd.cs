@@ -46,7 +46,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 
 			_modulesExecutor.ExecuteModules(Modules, Container, assemblies, allTypes);
 
-			var typeIndex = Options.TypeMatcher.MapTypes(allTypes);
+			var typeIndex = Options.ServiceIndexer.MapTypes(allTypes);
 
 			_deepServiceRegistrator.Register(Container, Options, typeIndex, assemblies);
 

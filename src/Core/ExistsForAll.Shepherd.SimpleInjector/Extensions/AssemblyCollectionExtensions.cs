@@ -16,7 +16,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.Extensions
 
 		public static AssemblyCollection AddAllTypeAssemblies(this AssemblyCollection target, Assembly assembly, params Assembly[] assemblies)
 		{
-			AddAssemblies(target, x => new AllTypesAssemblyLoader(x), JoinAssemblies(assembly, assemblies));
+			AddAssemblies(target, x => new CompleteTypeAssemblyLoader(x), JoinAssemblies(assembly, assemblies));
 
 			return target;
 		}

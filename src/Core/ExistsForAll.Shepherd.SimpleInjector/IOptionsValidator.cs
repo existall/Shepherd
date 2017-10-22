@@ -15,7 +15,7 @@
 			Guard.NullArgument(options.GenericRegistration, nameof(options.GenericRegistration));
 			Guard.NullArgument(options.SingleServiceRegistration, nameof(options.SingleServiceRegistration));
 			Guard.NullArgument(options.SkipRegistration, nameof(options.SkipRegistration));
-			Guard.NullArgument(options.TypeMatcher, nameof(options.TypeMatcher));
+			Guard.NullArgument(options.ServiceIndexer, nameof(options.ServiceIndexer));
 		}
 	}
 }
