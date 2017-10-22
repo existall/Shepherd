@@ -14,7 +14,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 		{
 			var shepherd = new Shepherd();
 
-			shepherd.Assemblies.AddAllTypeAssemblies(this.GetType().Assembly);
+			shepherd.Assemblies.AddCompleteTypeAssembly(this.GetType().Assembly);
 
 			var container = shepherd.Herd();
 			//container.Verify();

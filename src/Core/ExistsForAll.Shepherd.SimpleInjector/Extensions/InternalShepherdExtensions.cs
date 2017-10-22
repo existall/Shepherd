@@ -11,7 +11,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.Extensions
 			return new RegistrationContext(serviceDescriptor.ServiceType, serviceDescriptor.ImplementationTypes, assemblies);
 		}
 
-		public static IServiceDescriptor AsRegistrationContext(this IRegistrationContext context)
+		public static IServiceDescriptor AsServiceDescriptor(this IRegistrationContext context)
 		{
 			return new ServiceDescriptor(context.ServiceType, context.ImplementationTypes);
 		}
