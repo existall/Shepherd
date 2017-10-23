@@ -5,15 +5,7 @@ using SimpleInjector;
 
 namespace ExistsForAll.Shepherd.SimpleInjector
 {
-	internal interface IDeepServiceRegistrator
-	{
-		void Register(Container container,
-			IShepherdOptions options,
-			IEnumerable<ServiceTypeMap> typeIndex,
-			Assembly[] assemblies);
-	}
-
-	internal class DeepServiceRegistrator : IDeepServiceRegistrator
+	internal class AutoRegistrationBehavior : IAutoRegistrationBehavior
 	{
 		public void Register(Container container,
 			IShepherdOptions options,
@@ -51,8 +43,8 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 				if (action.ShouldRegister(serviceDescriptor))
 				{
 					action.Register(new RegistrationContext(serviceDescriptor.ServiceType,
-						serviceDescriptor.ImplementationTypes,
-						assemblies),
+							serviceDescriptor.ImplementationTypes,
+							assemblies),
 						container);
 					return;
 				}

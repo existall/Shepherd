@@ -12,9 +12,15 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 
 			foreach (var module in modules)
 			{
-				module.Configure(context);
+				try
+				{
+					module.Configure(context);
+				}
+				catch (Exception e)
+				{
+					throw new ModuleExecutionException(module.GetType().FullName, e);
+				}
 			}
-
 		}
 	}
 }

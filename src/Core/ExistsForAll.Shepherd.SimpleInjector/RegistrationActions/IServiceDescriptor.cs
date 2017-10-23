@@ -8,16 +8,4 @@ namespace ExistsForAll.Shepherd.SimpleInjector.RegistrationActions
 		Type ServiceType { get; }
 		IEnumerable<Type> ImplementationTypes { get; }
 	}
-
-	internal struct ServiceDescriptor : IServiceDescriptor
-	{
-		public Type ServiceType { get; }
-		public IEnumerable<Type> ImplementationTypes { get; }
-
-		public ServiceDescriptor(Type serviceType, IEnumerable<Type> implementationTypes)
-		{
-			ServiceType = serviceType;
-			ImplementationTypes = implementationTypes;
-		}
-	}
 }

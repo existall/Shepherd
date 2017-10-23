@@ -7,7 +7,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 	{
 		private readonly IOptionsValidator _optionsValidator;
 		private readonly IModulesExecutor _modulesExecutor;
-		private readonly IDeepServiceRegistrator _deepServiceRegistrator;
+		private readonly IAutoRegistrationBehavior _autoRegistrationBehavior;
 
 		private Container Container { get; }
 
@@ -18,7 +18,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 		public Shepherd(Container container = null)
 			: this(new OptionsValidator(),
 				  new ModuleExecutor(),
-				  new DeepServiceRegistrator())
+				  new AutoRegistrationBehavior())
 		{
 			if (container == null)
 				Container = new Container();
@@ -26,11 +26,11 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 
 		internal Shepherd(IOptionsValidator optionsValidator,
 			IModulesExecutor modulesExecutor,
-			IDeepServiceRegistrator deepServiceRegistrator)
+			IAutoRegistrationBehavior autoRegistrationBehavior)
 		{
 			_optionsValidator = optionsValidator;
 			_modulesExecutor = modulesExecutor;
-			_deepServiceRegistrator = deepServiceRegistrator;
+			_autoRegistrationBehavior = autoRegistrationBehavior;
 		}
 
 		public Container Herd()
@@ -42,13 +42,14 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 			var allTypes = Assemblies.GetAllTypes()
 				.ToArray();
 
-			var assemblies = Assemblies.Assemblies.ToArray();
+			var assemblies = Assemblies.Assemblies
+				.ToArray();
 
 			_modulesExecutor.ExecuteModules(Modules, Container, assemblies, allTypes);
 
 			var typeIndex = Options.ServiceIndexer.MapTypes(allTypes);
 
-			_deepServiceRegistrator.Register(Container, Options, typeIndex, assemblies);
+			_autoRegistrationBehavior.Register(Container, Options, typeIndex, assemblies);
 
 			return Container;
 		}
