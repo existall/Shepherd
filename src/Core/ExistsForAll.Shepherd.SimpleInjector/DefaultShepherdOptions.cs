@@ -6,10 +6,10 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 	{
 		public IContainerOptionsConfiguration ConfigureContainerOptions { get; set; } = new DefaultContainerOptionsConfiguration();
 		public IServiceIndexer ServiceIndexer { get; set; } = new ServiceIndexer();
-		public ISkipRegistration SkipRegistration { get; set; } = new SkipRegistrationAction();
-		public IGenericRegistration GenericRegistration { get; set; } = new GenericRegistration();
-		public IDecoratorRegistration DecoratorRegistration { get; set; } = new DecoratorRegistration();
-		public ICollectionRegistration CollectionRegistration { get; set; } = new CollectionRegistration();
-		public ISingleServiceRegistration SingleServiceRegistration { get; set; } = new SingleServiceRegistration();
+		public IRegistrationConstraintBehavior RegistrationConstraintBehavior { get; set; } = new RegistrationConstraintBehavior();
+		public IGenericRegistrationBehavior GenericRegistrationBehavior { get; set; } = new GenericRegistrationBehavior();
+		public IDecoratorRegistrationBehavior DecoratorRegistrationBehavior { get; set; } = new DecoratorRegistrationBehavior();
+		public ICollectionRegistrationBehavior CollectionRegistrationBehavior { get; set; } = new CollectionRegistrationBehavior();
+		public ISingleServiceRegistrationBehavior SingleServiceRegistrationBehavior { get; set; } = new SingleServiceRegistrationBehavior();
 	}
 }

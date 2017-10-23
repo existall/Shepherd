@@ -5,12 +5,12 @@ using SimpleInjector;
 
 namespace ExistsForAll.Shepherd.SimpleInjector.RegistrationActions
 {
-	public interface IDecoratorRegistration : IRegistrationActionCandidate
+	public interface IDecoratorRegistrationBehavior : IRegistrationBehavior
 	{
 
 	}
 
-	public class DecoratorRegistration : IDecoratorRegistration
+	public class DecoratorRegistrationBehavior : IDecoratorRegistrationBehavior
 	{
 		public virtual bool ShouldRegister(IServiceDescriptor descriptor)
 		{

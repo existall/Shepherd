@@ -3,9 +3,9 @@ using SimpleInjector;
 
 namespace ExistsForAll.Shepherd.SimpleInjector.RegistrationActions
 {
-	public interface ICollectionRegistration : IRegistrationActionCandidate { }
+	public interface ICollectionRegistrationBehavior : IRegistrationBehavior { }
 
-	public class CollectionRegistration : ICollectionRegistration
+	public class CollectionRegistrationBehavior : ICollectionRegistrationBehavior
 	{
 		public virtual bool ShouldRegister(IServiceDescriptor descriptor)
 		{

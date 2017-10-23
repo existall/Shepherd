@@ -20,19 +20,19 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 			IEnumerable<ServiceTypeMap> typeIndex,
 			Assembly[] assemblies)
 		{
-			var actions = new List<IRegistrationActionCandidate>
+			var actions = new List<IRegistrationBehavior>
 			{
-				options.GenericRegistration,
-				options.DecoratorRegistration,
-				options.CollectionRegistration,
-				options.SingleServiceRegistration
+				options.GenericRegistrationBehavior,
+				options.DecoratorRegistrationBehavior,
+				options.CollectionRegistrationBehavior,
+				options.SingleServiceRegistrationBehavior
 			};
 
 			foreach (var index in typeIndex)
 			{
 				var candidateDescriptor = new ServiceDescriptor(index.ServiceType, index.ImplementationTypes);
 
-				if (options.SkipRegistration.ShouldSkipAutoRegistration(candidateDescriptor))
+				if (options.RegistrationConstraintBehavior.ShouldSkipAutoRegistration(candidateDescriptor))
 				{
 					continue;
 				}
@@ -41,7 +41,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 			}
 		}
 
-		private static void IterateActions(List<IRegistrationActionCandidate> actions,
+		private static void IterateActions(List<IRegistrationBehavior> actions,
 			IServiceDescriptor serviceDescriptor,
 			Container container,
 			Assembly[] assemblies)

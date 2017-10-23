@@ -5,10 +5,10 @@ using SimpleInjector;
 
 namespace ExistsForAll.Shepherd.SimpleInjector.RegistrationActions
 {
-	public interface IGenericRegistration : IRegistrationActionCandidate
+	public interface IGenericRegistrationBehavior : IRegistrationBehavior
 	{ }
 
-	public class GenericRegistration : IGenericRegistration
+	public class GenericRegistrationBehavior : IGenericRegistrationBehavior
 	{
 		public virtual bool ShouldRegister(IServiceDescriptor descriptor)
 		{
