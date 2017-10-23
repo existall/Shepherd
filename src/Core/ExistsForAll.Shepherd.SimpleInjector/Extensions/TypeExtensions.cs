@@ -10,7 +10,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.Extensions
 		public static bool IsGenericType(this Type type) => type.Info().IsGenericType;
 
 		public static bool IsGenericTypeDefinition(this Type type) => type.Info().IsGenericType;
-
+		
 		public static Type GetGenericTypeDefinition(this Type type) => type.Info().GetGenericTypeDefinition();
 
 		public static bool IsClass(this Type type) => type.Info().IsClass;
@@ -18,6 +18,8 @@ namespace ExistsForAll.Shepherd.SimpleInjector.Extensions
 		public static bool IsAbstract(this Type type) => type.Info().IsAbstract;
 
 		public static bool IsAssignableFrom(this Type type, Type assignableType) => type.Info().IsAssignableFrom(assignableType);
+
+		public static bool IsInterface(this Type type) => type.Info().IsInterface;
 
 		public static TypeInfo Info(this Type type) => type.GetTypeInfo();
 	}

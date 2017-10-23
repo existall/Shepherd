@@ -5,7 +5,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 {
 	public interface IServiceIndexer
 	{
-		Predicate<Type> TypeFilter { get; set; }
+		FilterCollection Filters { get; }
 		IEnumerable<ServiceTypeMap> MapTypes(IEnumerable<Type> applicationTypes);
 	}
 }

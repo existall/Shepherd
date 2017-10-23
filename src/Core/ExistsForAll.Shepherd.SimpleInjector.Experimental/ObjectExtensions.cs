@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using ExistsForAll.Shepherd.SimpleInjector.Experimental.ArrayExtensions;
 
 namespace ExistsForAll.Shepherd.SimpleInjector.Experimental
 {

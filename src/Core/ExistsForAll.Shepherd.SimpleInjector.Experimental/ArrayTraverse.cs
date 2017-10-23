@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ExistsForAll.Shepherd.SimpleInjector.Experimental.ArrayExtensions
+namespace ExistsForAll.Shepherd.SimpleInjector.Experimental
 {
 	internal class ArrayTraverse
 	{

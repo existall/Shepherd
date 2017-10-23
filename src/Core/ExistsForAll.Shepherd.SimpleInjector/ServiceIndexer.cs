@@ -3,25 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using ExistsForAll.Shepherd.SimpleInjector.Extensions;
+using ExistsForAll.Shepherd.SimpleInjector.Filters;
 using ExistsForAll.Shepherd.SimpleInjector.Resources;
 
 namespace ExistsForAll.Shepherd.SimpleInjector
 {
 	public class ServiceIndexer : IServiceIndexer
 	{
-		public Predicate<Type> TypeFilter { get; set; } = type => true;
+		public FilterCollection Filters { get; } = new FilterCollection();
 
-		public IEnumerable<ServiceTypeMap> MapTypes(IEnumerable<Type> applicationTypes)
+		public virtual IEnumerable<ServiceTypeMap> MapTypes(IEnumerable<Type> applicationTypes)
 		{
-			if (TypeFilter == null)
+			if (Filters == null)
 				throw new AutoRegistrationException(ExceptionMessages.MissingTypeFilterMessage);
 
-			var types = applicationTypes.Where(x => TypeFilter(x)).ToArray();
+			var allTypes = applicationTypes.ToArray();
 
 			var mapper = new Dictionary<Type, List<Type>>();
 			var genericMapper = new Dictionary<Type, List<Type>>();
 
-			types.Where(x => x.GetTypeInfo().IsInterface)
+			allTypes.Where(x => x.IsInterface())
+				.Where(x => Filters.OfType<IInterfaceAccumulationFilter>()
+				.All(filter => filter.ShouldExcludeInterface(x)))
 				.ForEach(@interface =>
 				{
 					if (@interface.IsGenericType())
@@ -34,7 +37,9 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 					}
 				});
 
-			types.Where(x => x.IsClass() && !x.IsAbstract())
+			allTypes.Where(x => x.IsClass() && !x.IsAbstract())
+				.Where(x => Filters.OfType<IImplementationAccumulationFilter>()
+				.All(filter => filter.ShouldExcludeClass(x)))
 				.ForEach(typeCandidate =>
 				{
 					foreach (var @interface in typeCandidate.GetTypeInfo().GetInterfaces())

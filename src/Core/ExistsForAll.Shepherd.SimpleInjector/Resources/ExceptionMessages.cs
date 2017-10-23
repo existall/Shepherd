@@ -7,7 +7,7 @@ An attribute type must be set in order for the current configuration.
 Another functionality can be provided by overloading Register method or replacing IRegistrationConstraintBehavior interface";
 
 		public const string MissingTypeFilterMessage = @"While gathering all service types and implemintations in TypeMatcher.MapTypes method
- the TypeFilter predicat is null. Please provide one";
+ the ExclusionTypeFilter predicat is null. Please provide one";
 
 		public static string ModuleExecutionExceptionMessage(string moduleName) => $@"While executing module {moduleName} an exception has occurred.";
 	}
