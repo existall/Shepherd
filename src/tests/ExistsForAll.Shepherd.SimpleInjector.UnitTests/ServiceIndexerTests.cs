@@ -74,7 +74,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 		{
 			var sut = BuildSut();
 
-			var results = sut.MapTypes(new[] {typeof(IOpenGenericsInterface<>), typeof(OpenGenericsInterface<>)});
+			var results = sut.MapTypes(new[] { typeof(IOpenGenericsInterface<>), typeof(OpenGenericsInterface<>) });
 
 			var map = results.Single(x => x.ServiceType == typeof(IOpenGenericsInterface<>));
 
@@ -88,12 +88,61 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 
 			var results = sut.MapTypes(new[] { typeof(IOpenCloseGenericsInterface<>),
 				GetType<IntOpenCloseGenericsInterface>(),
-				GetType<StringOpenCloseGenericsInterface>() 
+				GetType<StringOpenCloseGenericsInterface>()
 			});
 
 			var map = results.Single(x => x.ServiceType == typeof(IOpenCloseGenericsInterface<>));
-			Assert.Collection(map.ImplementationTypes, GetType<IntOpenCloseGenericsInterface>(), GetType<StringOpenCloseGenericsInterface>());
-			Assert.Single(map.ImplementationTypes, typeof(OpenGenericsInterface<>));
+
+			Assert.Collection(map.ImplementationTypes,
+				item => Assert.Equal(typeof(IntOpenCloseGenericsInterface), item),
+				item => Assert.Equal(typeof(StringOpenCloseGenericsInterface), item));
+		}
+
+		[Fact]
+		public void MapTypes_WhenIndexInterfaceWithoutImpl_ShouldNotHaveImp()
+		{
+			var sut = BuildSut();
+
+			var results = sut.MapTypes(new[] { typeof(IInterface) });
+
+			var map = results.Single(x => x.ServiceType == typeof(IInterface));
+
+			Assert.Empty(map.ImplementationTypes);
+		}
+
+		[Fact]
+		public void MapTypes_WhenTryingToIndexAllTypes_ShouldIndexAll()
+		{
+			var sut = BuildSut();
+
+			var results = sut.MapTypes(new[] {
+				GetType<IInterface>(),
+				GetType<Interface>(),
+				GetType<IInterface2>(),
+				GetType<Interface2>(),
+				typeof(IOpenGenericsInterface<>),
+				typeof(OpenGenericsInterface<>),
+				typeof(IOpenCloseGenericsInterface<>),
+				GetType<IntOpenCloseGenericsInterface>(),
+				GetType<StringOpenCloseGenericsInterface>()
+			}).ToArray();
+
+
+			Assert.NotEmpty(results);
+
+			AssertMap(results, GetType<IInterface>(), new[] { GetType<Interface>() });
+			AssertMap(results, GetType<IInterface2>(), new[] { GetType<Interface2>() });
+			AssertMap(results, typeof(IOpenGenericsInterface<>), new[] { typeof(OpenGenericsInterface<>) });
+			AssertMap(results, typeof(IOpenCloseGenericsInterface<>), new[] {
+					GetType<IntOpenCloseGenericsInterface>(),
+					GetType<StringOpenCloseGenericsInterface>() });
+		}
+
+		private static void AssertMap(ServiceTypeMap[] mapping, Type serviceType, Type[] implementationTypes)
+		{
+			var map = mapping.Single(x => x.ServiceType == serviceType);
+			Assert.Equal(map.ServiceType, serviceType);
+			Assert.Equal(map.ImplementationTypes, implementationTypes);
 		}
 
 		private static ServiceIndexer BuildSut()
@@ -101,7 +150,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 			return new ServiceIndexer();
 		}
 
-		private Type GetType<T>()
+		private static Type GetType<T>()
 		{
 			return typeof(T);
 		}
@@ -121,7 +170,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 
 		private interface IInterface2
 		{
-			
+
 		}
 
 		private class Interface2 : IInterface2
@@ -130,7 +179,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 
 		private interface IOpenGenericsInterface<T>
 		{
-			
+
 		}
 
 		private class OpenGenericsInterface<T> : IOpenGenericsInterface<T>
@@ -139,7 +188,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 
 		private interface IOpenCloseGenericsInterface<T>
 		{
-			
+
 		}
 
 		private class IntOpenCloseGenericsInterface : IOpenCloseGenericsInterface<int>
