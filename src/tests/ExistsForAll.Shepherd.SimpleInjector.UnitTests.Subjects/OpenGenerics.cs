@@ -1,6 +1,7 @@
 ﻿namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests.Subjects
 {
-	internal class OpenGenerics<T> : IOpenGenerics<T>
+	public class OpenGenerics<T> : IOpenGenerics<T>
 	{
+		public T TypeOfGeneric { get; set; }
 	}
 }

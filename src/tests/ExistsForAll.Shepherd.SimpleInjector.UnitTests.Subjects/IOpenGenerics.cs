@@ -2,6 +2,6 @@
 {
 	public interface IOpenGenerics<T>
 	{
-		
+		T TypeOfGeneric { get; set; }
 	}
 }

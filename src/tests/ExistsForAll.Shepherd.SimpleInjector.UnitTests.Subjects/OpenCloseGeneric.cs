@@ -2,6 +2,6 @@
 {
 	public class OpenCloseGeneric : IOpenCloseGeneric<int>
 	{
-
+		public int TypeOfGeneric { get; }
 	}
 }

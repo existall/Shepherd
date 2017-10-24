@@ -1,6 +1,6 @@
 ﻿namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests.Subjects
 {
-	class CollectionService2 : ICollectionService
+	public class CollectionService2 : ICollectionService
 	{
 	}
 }
