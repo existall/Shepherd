@@ -11,13 +11,17 @@ namespace ExistsForAll.Shepherd.SimpleInjector.RegistrationActions
 		{
 			var count = descriptor.ImplementationTypes.Count();
 
-			if (count != 2)
+			if (count <= 1)
 				return false;
 
-			return descriptor.ImplementationTypes
+			var shouldRegister =  descriptor.ImplementationTypes
 				.Any(implementationType =>
 					HasSameServiceAsDependency(implementationType, descriptor.ServiceType));
 
+			if(shouldRegister && count != 2)
+				throw new DecoratorRegistrationException(descriptor);
+
+			return shouldRegister;
 		}
 
 		public virtual void Register(IRegistrationContext context, Container container)

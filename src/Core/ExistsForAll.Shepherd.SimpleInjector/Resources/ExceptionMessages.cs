@@ -1,4 +1,8 @@
-﻿namespace ExistsForAll.Shepherd.SimpleInjector.Resources
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace ExistsForAll.Shepherd.SimpleInjector.Resources
 {
 	internal static class ExceptionMessages
 	{
@@ -10,5 +14,10 @@ Another functionality can be provided by overloading Register method or replacin
  the ExclusionTypeFilter predicat is null. Please provide one";
 
 		public static string ModuleExecutionExceptionMessage(string moduleName) => $@"While executing module {moduleName} an exception has occurred.";
+
+		public static string DecoratorRegistrationExceptionMessage(Type serviceType, IEnumerable<Type> implTypes) => $@"Shepherd checked if service {serviceType.Name} uses Decorator.
+While one of the implementation is a decorator more than {implTypes.Count()} implementations found. To be able to use decorator please use two implementations or a Shepherd Module for custom registration.";
+		
+
 	}
 }
