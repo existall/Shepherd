@@ -3,7 +3,7 @@ using SimpleInjector;
 
 namespace ExistsForAll.Shepherd.SimpleInjector
 {
-	public class Shepherd : IShepherd
+	public class Shepherd
 	{
 		private readonly IOptionsValidator _optionsValidator;
 		private readonly IModulesExecutor _modulesExecutor;

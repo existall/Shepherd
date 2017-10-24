@@ -58,6 +58,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 				});
 
 			return genericMapper.Concat(mapper)
+				.Where(x => x.Value != null)
 				.Select(x => new ServiceTypeMap(x.Key, x.Value))
 				.ToArray();
 		}
