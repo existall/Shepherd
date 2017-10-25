@@ -10,10 +10,12 @@ SimpleInjector is a great IoC Container, over the years it became my go to DI fo
 Thus we've developed methodologies to register infrastructure and domain services quickly.
 
 ## Table of Content
-1.Getting started  
-2.[Assemblies](https://raw.githubusercontent.com/existall/Shepherd/master/documents/Assemblies.md)  
-3.[Modules]()  
-4.[Auto-Registration]()
+1. Getting started  
+2. SimpleInjector Configuration
+3. [Assemblies](https://github.com/existall/Shepherd/blob/master/documents/Assemblies.md)  
+4. [Modules]()  
+5. [Auto-Registration]()
+
 ### Getting Started
 
 ```C#
