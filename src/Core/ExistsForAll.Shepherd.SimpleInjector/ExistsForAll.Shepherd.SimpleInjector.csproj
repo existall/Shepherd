@@ -10,7 +10,7 @@ Shepherd out of the box help auto-register domain service and create modules for
 Shepered can act as the application Composition Root.</Description>
     <PackageProjectUrl>https://github.com/existall/Shepherd</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/existall/Shepherd/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageIconUrl>https://github.com/existall/Shepherd/blob/master/art/existsForAll_logo.jpg</PackageIconUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/existall/Shepherd/master/art/exitsForAll_icon.png</PackageIconUrl>
     <RepositoryUrl>https://github.com/existall/Shepherd</RepositoryUrl>
     <RepositoryType>GIT</RepositoryType>
     <PackageTags>SimpleInjector Ioc ExistAll ExistsForAll Orchestration</PackageTags>
