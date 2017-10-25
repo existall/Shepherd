@@ -1,0 +1,1 @@
+﻿# SimpleInjector Configuration
