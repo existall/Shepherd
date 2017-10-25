@@ -4,9 +4,9 @@ namespace ExistsForAll.Shepherd.SimpleInjector.Extensions
 {
 	public static class ShepherdExtension
 	{
-		public static Shepherd AddCompleteTypeAssembly(this Shepherd target,Assembly assembly, params Assembly[] assemblies)
+		public static Shepherd AddCompleteTypeAssemblies(this Shepherd target,Assembly assembly, params Assembly[] assemblies)
 		{
-			target.Assemblies.AddCompleteTypeAssembly(assembly, assemblies);
+			target.Assemblies.AddCompleteTypeAssemblies(assembly, assemblies);
 
 			return target;
 		}

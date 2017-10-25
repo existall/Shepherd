@@ -16,7 +16,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 			_allTypes = new Lazy<Type[]>(GetAllTypesImp);
 		}
 
-		public IEnumerable<Assembly> Assemblies => _assemblies;
+		internal IEnumerable<Assembly> Assemblies => _assemblies;
 
 		public void Add(IAssemblyLoader assemblyLoader)
 		{
@@ -40,7 +40,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 			});
 		}
 
-		public IEnumerable<Type> GetAllTypes()
+		internal IEnumerable<Type> GetAllTypes()
 		{
 			return _allTypes.Value;
 		}

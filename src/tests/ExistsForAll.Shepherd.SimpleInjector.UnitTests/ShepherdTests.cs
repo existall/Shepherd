@@ -13,7 +13,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 		public void Herd_FullIntegrationTest()
 		{
 			var sut = new Shepherd();
-			sut.AddCompleteTypeAssembly(typeof(INoImplInterface).Assembly);
+			sut.AddCompleteTypeAssemblies(typeof(INoImplInterface).Assembly);
 			sut.Options.ServiceIndexer.Filters.Add(new InterfaceAccumulationFilter(typeof(IFilterService)));
 			var container = sut.Herd();
 
