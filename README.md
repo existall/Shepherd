@@ -11,7 +11,7 @@ Thus we've developed methodologies to register infrastructure and domain service
 
 ## Table of Content
 1.Getting started  
-2.[Assemblies]()  
+2.[Assemblies](https://raw.githubusercontent.com/existall/Shepherd/master/documents/Assemblies.md)  
 3.[Modules]()  
 4.[Auto-Registration]()
 ### Getting Started
