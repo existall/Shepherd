@@ -11,7 +11,7 @@ public interface IServiceIndexer
 {
 	FilterCollection Filters { get; }
 	IEnumerable<ServiceTypeMap> MapTypes(IEnumerable<Type> applicationTypes);
-}When 
+}
 ```
 
 ### Filters
@@ -38,5 +38,25 @@ public interface IImplementationAccumulationFilter : IFilter
 
 ## Order of Registration 
 
+After the `ServiceIndex` map all services it will register interfaces to services using behaviors.
 
+1. The first behavior `Shepherd` invokes is the `IRegistrationConstraintBehavior` which decided rather or not the service should be registered. This is a general behavior and will be checked against all services. For example the default behavior is not to register an interface without any implementation.
+2. All further behaviors are in the same manner, it asks should it register the following Services and how to do it. All behaviors implement the following interface.
+
+
+```C#
+public interface IRegistrationBehavior
+{
+	bool ShouldRegister(IServiceDescriptor descriptor);
+	void Register(IRegistrationContext context, Container container);
+}
+```
+
+The order in which the behavior are invoked is:
+1. `IGenericRegistrationBehavior`
+2. `IDecoratorRegistrationBehavior`
+3. `ICollectionRegistrationBehavior`
+4. `ISingleServiceRegistrationBehavior`
+
+There is no way to change the order of invocation, i found that this is the best way to auto register service.
 
