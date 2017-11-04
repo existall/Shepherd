@@ -2,13 +2,19 @@
 
 # ExistsForAll.Shepherd.SimpleInjector
 
-## installation
-`Install-Package ExistsForAll.Shepherd.SimpleInjector`
 
-### Intoduction
-SimpleInjector is a great IoC Container, over the years it became my go to DI for every project.  
-Thus we've developed methodologies to register infrastructure and domain services quickly.<br>
-`Shepherd` should act as your Composition Root in your application startup. 
+Love Dependency Injection, but tired of your herd of services scatter around your code freely? Want to feel in control of your dependecies again? Meet **Shepherd**. The DI wrapper that objects follow.
+
+Shepherd provides dependency injection without the hassle of manually assigning interfaces and services. Shepherd will register your services automatically, and let you define specific registrations (for logging, storage access, etc.).
+
+Shepherd currently wraps [SimpleInjector](https://simpleinjector.org/index.html), but is planned to support more DI tools in the future.
+
+Shepherd should act as your Composition Root in your application startup. 
+
+## Installation
+```
+	Install-Package ExistsForAll.Shepherd.SimpleInjector
+```
 
 ## Table of Content
 1. Getting started  
