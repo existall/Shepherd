@@ -46,9 +46,12 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 					{
 						if (@interface.IsGenericType())
 						{
-							var @class = genericMapper.First(x => x.Key.GetGenericTypeDefinition() == @interface.GetGenericTypeDefinition());
+							var @class = genericMapper.Where(x => x.Key.GetGenericTypeDefinition() == @interface.GetGenericTypeDefinition())
+							.ToArray();
 
-							@class.Value.Add(typeCandidate);
+							if (@class.Any())
+								@class.First().Value.Add(typeCandidate);
+
 							continue;
 						}
 
