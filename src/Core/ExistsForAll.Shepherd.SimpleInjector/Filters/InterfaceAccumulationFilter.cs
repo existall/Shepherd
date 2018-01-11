@@ -15,7 +15,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.Filters
 
 		public bool ShouldExcludeInterface(Type @interface)
 		{
-			return !Interfaces.Contains(@interface);
+			return Interfaces.Contains(@interface);
 		}
 	}
 }

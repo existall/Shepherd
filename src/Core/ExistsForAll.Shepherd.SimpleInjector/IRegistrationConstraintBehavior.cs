@@ -1,4 +1,5 @@
-﻿using ExistsForAll.Shepherd.SimpleInjector.RegistrationActions;
+﻿using System;
+using ExistsForAll.Shepherd.SimpleInjector.RegistrationActions;
 
 namespace ExistsForAll.Shepherd.SimpleInjector
 {

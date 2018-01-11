@@ -24,7 +24,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 
 			allTypes.Where(x => x.IsInterface())
 				.Where(x => Filters.OfType<IInterfaceAccumulationFilter>()
-				.All(filter => filter.ShouldExcludeInterface(x)))
+				.All(filter => !filter.ShouldExcludeInterface(x)))
 				.ForEach(@interface =>
 				{
 					if (@interface.IsGenericType())
@@ -39,7 +39,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 
 			allTypes.Where(x => x.IsClass() && !x.IsAbstract())
 				.Where(x => Filters.OfType<IImplementationAccumulationFilter>()
-				.All(filter => filter.ShouldExcludeClass(x)))
+				.All(filter => !filter.ShouldExcludeClass(x)))
 				.ForEach(typeCandidate =>
 				{
 					foreach (var @interface in typeCandidate.GetTypeInfo().GetInterfaces())

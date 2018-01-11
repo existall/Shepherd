@@ -15,7 +15,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.Filters
 
 		public bool ShouldExcludeClass(Type implementation)
 		{
-			return !Implementations.Contains(implementation);
+			return Implementations.Contains(implementation);
 		}
 	}
 }
