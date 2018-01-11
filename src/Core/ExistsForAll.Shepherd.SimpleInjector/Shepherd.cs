@@ -20,8 +20,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 				  new ModuleExecutor(),
 				  new AutoRegistrationBehavior())
 		{
-			if (container == null)
-				Container = new Container();
+			Container = container ?? new Container();
 		}
 
 		internal Shepherd(IOptionsValidator optionsValidator,
