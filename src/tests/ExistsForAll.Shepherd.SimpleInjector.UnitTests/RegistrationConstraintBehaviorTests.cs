@@ -13,8 +13,8 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 
 			var result = sut.ShouldSkipAutoRegistration(
 				new ServiceDescriptor(typeof(IInterfaceWithAttribute),
-				new[] { typeof(InterfaceWithAttribute) })
-				);
+					new[] {typeof(InterfaceWithAttribute)})
+			);
 
 			Assert.True(result);
 		}
@@ -26,7 +26,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 
 			var result = sut.ShouldSkipAutoRegistration(
 				new ServiceDescriptor(typeof(IInterfaceWithOutAttribute),
-					new[] { typeof(InterfaceWithOutAttribute) })
+					new[] {typeof(InterfaceWithOutAttribute)})
 			);
 
 			Assert.False(result);
@@ -41,7 +41,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 
 			var result = sut.ShouldSkipAutoRegistration(
 				new ServiceDescriptor(typeof(IInterfaceWithNewAttribute),
-					new[] { typeof(InterfaceWithNewAttribute) })
+					new[] {typeof(InterfaceWithNewAttribute)})
 			);
 
 			Assert.True(result);
@@ -56,21 +56,22 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 
 			var result = sut.ShouldSkipAutoRegistration(
 				new ServiceDescriptor(typeof(IInterfaceWithOutAttribute),
-					new[] { typeof(InterfaceWithOutAttribute) })
+					new[] {typeof(InterfaceWithOutAttribute)})
 			);
 
 			Assert.False(result);
 		}
 
 		[Fact]
-		public void ShouldSkipAutoRegistration_WhenInterfaceDontHaveCustomAttributeAndHaveSkipAttribute_ShouldNotSkipRegistration()
+		public void
+			ShouldSkipAutoRegistration_WhenInterfaceDontHaveCustomAttributeAndHaveSkipAttribute_ShouldNotSkipRegistration()
 		{
 			var sut = BuildSut();
 			sut.AttributeType = typeof(SomeAttribute);
 
 			var result = sut.ShouldSkipAutoRegistration(
 				new ServiceDescriptor(typeof(IInterfaceWithAttribute),
-					new[] { typeof(InterfaceWithAttribute) })
+					new[] {typeof(InterfaceWithAttribute)})
 			);
 
 			Assert.False(result);
@@ -84,7 +85,6 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 		[SkipRegistration]
 		private interface IInterfaceWithAttribute
 		{
-
 		}
 
 		private class InterfaceWithAttribute : IInterfaceWithAttribute
@@ -93,7 +93,6 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 
 		private interface IInterfaceWithOutAttribute
 		{
-
 		}
 
 		private class InterfaceWithOutAttribute : IInterfaceWithOutAttribute
@@ -102,18 +101,15 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 
 		private class SomeAttribute : Attribute
 		{
-			
 		}
 
 		[Some]
 		private interface IInterfaceWithNewAttribute
 		{
-
 		}
 
 		private class InterfaceWithNewAttribute : IInterfaceWithNewAttribute
 		{
 		}
-
 	}
 }
