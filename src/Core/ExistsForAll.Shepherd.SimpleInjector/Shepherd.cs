@@ -44,11 +44,11 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 			var assemblies = Assemblies.Assemblies
 				.ToArray();
 
-			_modulesExecutor.ExecuteModules(Modules, Container, assemblies, allTypes);
-
 			var typeIndex = Options.ServiceIndexer.MapTypes(allTypes);
 
 			_autoRegistrationBehavior.Register(Container, Options, typeIndex, assemblies);
+
+			_modulesExecutor.ExecuteModules(Modules, Container, assemblies, allTypes);
 
 			return Container;
 		}
