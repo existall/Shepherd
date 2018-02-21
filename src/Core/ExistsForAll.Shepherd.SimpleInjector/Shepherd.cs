@@ -1,4 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using ExistsForAll.Shepherd.SimpleInjector.Extensions;
 using SimpleInjector;
 
 namespace ExistsForAll.Shepherd.SimpleInjector
@@ -34,6 +39,8 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 
 		public Container Herd()
 		{
+			X();
+
 			_optionsValidator.ValidateOptions(Options);
 
 			Options?.ConfigureContainerOptions.Configure(Container.Options);
@@ -51,6 +58,58 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 			_modulesExecutor.ExecuteModules(Modules, Container, assemblies, allTypes);
 
 			return Container;
+		}
+
+		private void X()
+		{
+			Container.ResolveUnregisteredType += (s, e) =>
+			{
+				if (e.Handled)
+					return;
+
+				var type = e.UnregisteredServiceType;
+				var typeInfo = type.GetTypeInfo();
+
+				//var isAssignableFrom = typeof(IEnumerable).IsAssignableFrom(type);
+
+				Type t = null;
+
+				if (type.IsArray)
+				{
+					t = type.GetElementType();
+				}
+
+				if (typeInfo.IsGenericType && typeInfo.GetGenericTypeDefinition() == typeof(IEnumerable<>))
+				{
+					t = typeInfo.GetGenericArguments().Single();
+				}
+
+				InstanceProducer producers = Container.GetRegistration(t);
+
+				// Create a stream --> array should be handled differntly !!!!
+				var castMethod = typeof(Enumerable).GetTypeInfo().GetMethod("Cast").MakeGenericMethod(t);
+				object stream = new [] {producers.GetInstance() }.Select(x => x);
+				stream = castMethod.Invoke(null, new[] { stream });
+
+				// Register stream as singleton
+				e.Register(Lifestyle.Singleton.CreateRegistration(type, () => stream, Container));
+
+
+				if (type.IsArray)
+				{
+					 t = type.GetElementType();
+				}
+				else
+				{
+					Type[] interfaces = type.GetTypeInfo().GetInterfaces();
+
+					t = interfaces.Where(x => x.IsGenericType() && x.GetGenericTypeDefinition() == typeof(IEnumerable<>))
+						.Select(x => x.GenericTypeArguments[0])
+						.FirstOrDefault();
+				}
+
+				//var instanceProducer = Container.GetRegistration(t);
+			};
 		}
 	}
 }

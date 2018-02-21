@@ -9,6 +9,19 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 {
 	public class ShepherdTests
 	{
+
+		[Fact]
+		public void Herd_FullIntegrationTest1()
+		{
+			var sut = new Shepherd();
+			sut.AddCompleteTypeAssemblies(typeof(INoImplInterface).Assembly);
+			//sut.Options.ServiceIndexer.Filters.Add(new InterfaceAccumulationFilter(typeof(IFilterService)));
+			var container = sut.Herd();
+
+			var singleTypeCollectionHolder = container.GetInstance<ISingleTypeCollectionHolder>();
+			singleTypeCollectionHolder = container.GetInstance<ISingleTypeCollectionHolder>();
+		}
+
 		[Fact]
 		public void Herd_FullIntegrationTest()
 		{
