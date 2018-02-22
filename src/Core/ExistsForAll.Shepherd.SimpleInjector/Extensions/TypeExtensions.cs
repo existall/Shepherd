@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Net;
 using System.Reflection;
 
 namespace ExistsForAll.Shepherd.SimpleInjector.Extensions

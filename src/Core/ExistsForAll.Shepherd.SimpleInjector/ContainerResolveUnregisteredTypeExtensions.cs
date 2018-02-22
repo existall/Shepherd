@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using ExistsForAll.Shepherd.SimpleInjector.Extensions;
-using ExistsForAll.Shepherd.SimpleInjector.Resources;
 using SimpleInjector;
 
 namespace ExistsForAll.Shepherd.SimpleInjector
@@ -21,49 +19,40 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 
 				if (serviceType.IsArray)
 				{
-					var elementType1 = serviceType.GetElementType();
-					var producer1 = container.GetRegistration(elementType1);
+					var elementType = serviceType.GetElementType();
+					var producer = container.GetRegistration(elementType);
 					
-					if(producer1 == null) 
+					if(producer == null)
 						return;
 
-					var array = Array.CreateInstance(elementType1, 1);
+					var array = Array.CreateInstance(elementType, 1);
 					
-					array.SetValue(producer1.GetInstance(),0);
+					array.SetValue(producer.GetInstance(), 0);
+					
+					e.Register(producer.Lifestyle.CreateRegistration(serviceType, () => array, container));
 
-					var castMethod1 = typeof(Enumerable)
+					return;
+				}
+
+				if (serviceType.IsGenericType() && serviceType.GetGenericTypeDefinition() == typeof(IEnumerable<>))
+				{
+					var elementType = serviceType.GetGenericArguments().Single();
+					var producer = container.GetRegistration(elementType);
+
+					if (producer == null)
+						return;
+
+					var castMethod = typeof(Enumerable)
 						.Info()
 						.GetMethod("Cast")
-						.MakeGenericMethod(elementType1);
+						.MakeGenericMethod(elementType);
 
-					object stream1 = new[] {producer1.GetInstance()}.Select(x => x);
-					
-					stream1 = castMethod1.Invoke(null, new[] {array});
-					
-					e.Register(producer1.Lifestyle.CreateRegistration(serviceType, () => stream1, container));
+					object stream = new[] {producer.GetInstance()}.Select(x => x);
+
+					stream = castMethod.Invoke(null, new[] {stream});
+
+					e.Register(producer.Lifestyle.CreateRegistration(serviceType, () => stream, container));
 				}
-				
-				if (!serviceType.IsGenericType() || serviceType.GetGenericTypeDefinition() != typeof(IEnumerable<>)) 
-					return;
-				
-				var elementType = serviceType.GetGenericArguments().Single();
-				var producer = container.GetRegistration(elementType);
-				
-				if(producer == null) 
-					return;
-					
-				// Create a stream --> array should be handled differntly !!!!
-
-				var castMethod = typeof(Enumerable)
-					.Info()
-					.GetMethod("Cast")
-					.MakeGenericMethod(elementType);
-					
-				object stream = new[] {producer.GetInstance()}.Select(x => x);
-					
-				stream = castMethod.Invoke(null, new[] {stream});
-
-				e.Register(producer.Lifestyle.CreateRegistration(serviceType, () => stream, container));
 			};
 
 			return container;

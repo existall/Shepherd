@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests.Subjects
+﻿namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests.Subjects
 {
 	public interface IOpenCloseGeneric<T>
 	{

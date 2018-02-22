@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using SimpleInjector;
 using Xunit;
 
@@ -9,7 +7,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 	public class ResolveUnregisteredTypeSingleImplAsCollectionTests
 	{
 		[Fact]
-		public void AddSingleAsCollectionSupport_WhenResolvingArray_ShouldThrowException()
+		public void AddSingleAsCollectionSupport_WhenResolvingArray_ShouldResolve()
 		{
 			var container = new Container();
 
@@ -18,24 +16,13 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 			container.Register<IService, ServiceOne>();
 			container.Register<IServicesHolder,ArrayServiceHolder>();
 
-			Assert.Throws<AutoRegistrationException>(() => container.GetInstance<IServicesHolder>());
+			var result = container.GetInstance<IServicesHolder>();
+
+			Assert.Single(result.IServices);
 		}
 		
 		[Fact]
-		public void Test()
-		{
-			var container = new Container();
-
-			//container.AddSingleAsCollectionSupport();
-
-			container.RegisterCollection(typeof(IService),new [] {typeof(ServiceOne)});
-			container.Register<IServicesHolder,ArrayServiceHolder>();
-
-			var servicesHolder = container.GetInstance<IServicesHolder>();
-		}
-		
-		[Fact]
-		public void XY()
+		public void AddSingleAsCollectionSupport_WhenResolvingWithoutRegisteringDependency_ShouldThrowSimpleInjectorException()
 		{
 			var container = new Container();
 
@@ -47,7 +34,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 		}
 
 		[Fact]
-		public void XYZ()
+		public void AddSingleAsCollectionSupport_WhenResolvingStream_ShouldResolve()
 		{
 			var container = new Container();
 
@@ -57,11 +44,11 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 
 			var result = container.GetInstance<IServicesHolder>();
 			
-			Assert.Equal(result.IServices.Count(), 1);
+			Assert.Single(result.IServices);
 		}
 
 		[Fact]
-		public void XYZ1()
+		public void AddSingleAsCollectionSupport_WhenRegistering_ShouldHaveTheSameLifestyle()
 		{
 			var container = new Container();
 
