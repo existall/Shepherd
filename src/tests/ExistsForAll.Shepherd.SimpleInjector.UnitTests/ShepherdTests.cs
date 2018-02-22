@@ -133,6 +133,8 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 					i => Assert.IsType<CollectionService2>(i),
 					i => Assert.IsType<CollectionService3>(i));
 
+				Assert.Throws<ActivationException>(() => container.GetInstance<ICollectionService>()); 
+
 				NotRegisteredAssertion(typeof(IFilterService));
 				NotRegisteredAssertion(typeof(INoImplInterface));
 			}
@@ -152,6 +154,34 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 			{
 				Assert.Throws<ActivationException>(() => container.GetInstance(type));
 			}
+		}
+		
+		[Fact]
+		public void Herd_WhenRequestingCollectionAndOnlyOneImpl_ShouldRegisterIt()
+		{
+			var sut = new Shepherd();
+			
+			sut.AddCompleteTypeAssemblies(typeof(INoImplInterface).Assembly);
+			
+			var container = sut.Herd();
+			
+			var result = container.GetInstance<ISingleTypeCollectionHolder>();
+			
+			Assert.Single(result.Collection);
+		}
+
+		[Fact]
+		public void Herd_WhenRequestingCollectionHasTwoOrMore_ShouldRegisterIt()
+		{
+			var sut = new Shepherd();
+
+			sut.AddCompleteTypeAssemblies(typeof(INoImplInterface).Assembly);
+
+			var container = sut.Herd();
+
+			var result = container.GetInstance<ISingleTypeCollectionHolder>();
+
+			Assert.Single(result.Collection);
 		}
 	}
 }

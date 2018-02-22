@@ -1,5 +1,4 @@
 ﻿using System;
-using Castle.DynamicProxy.Generators;
 using ExistsForAll.Shepherd.SimpleInjector.RegistrationActions;
 using Xunit;
 using static ExistsForAll.Shepherd.SimpleInjector.UnitTests.TestUtils;

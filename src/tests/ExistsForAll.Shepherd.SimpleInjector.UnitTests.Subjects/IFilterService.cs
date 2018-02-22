@@ -4,8 +4,4 @@
 	{
 		
 	}
-
-	public class FilterService : IFilterService
-	{
-	}
 }

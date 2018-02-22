@@ -17,8 +17,8 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 
 		public Shepherd(Container container = null)
 			: this(new OptionsValidator(),
-				  new ModuleExecutor(),
-				  new AutoRegistrationBehavior())
+				new ModuleExecutor(),
+				new AutoRegistrationBehavior())
 		{
 			Container = container ?? new Container();
 		}
@@ -38,6 +38,8 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 
 			Options?.ConfigureContainerOptions.Configure(Container.Options);
 
+			Container.AddSingleAsCollectionSupport();
+			
 			var allTypes = Assemblies.GetAllTypes()
 				.ToArray();
 

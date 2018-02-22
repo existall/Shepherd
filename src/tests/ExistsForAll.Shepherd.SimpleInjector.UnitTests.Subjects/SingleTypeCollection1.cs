@@ -1,6 +1,7 @@
 ﻿namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests.Subjects
 {
-	public interface ISingleImplService
+	public class SingleTypeCollection1 : ISingleTypeCollection
 	{
+
 	}
 }
