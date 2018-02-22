@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using ExistsForAll.Shepherd.SimpleInjector.Extensions;
 using ExistsForAll.Shepherd.SimpleInjector.Filters;
 using ExistsForAll.Shepherd.SimpleInjector.UnitTests.Subjects;
@@ -134,6 +133,8 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 					i => Assert.IsType<CollectionService2>(i),
 					i => Assert.IsType<CollectionService3>(i));
 
+				Assert.Throws<ActivationException>(() => container.GetInstance<ICollectionService>()); 
+
 				NotRegisteredAssertion(typeof(IFilterService));
 				NotRegisteredAssertion(typeof(INoImplInterface));
 			}
@@ -166,7 +167,21 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 			
 			var result = container.GetInstance<ISingleTypeCollectionHolder>();
 			
-			Assert.Equal(result.Collection.Count(),1);
+			Assert.Single(result.Collection);
+		}
+
+		[Fact]
+		public void Herd_WhenRequestingCollectionHasTwoOrMore_ShouldRegisterIt()
+		{
+			var sut = new Shepherd();
+
+			sut.AddCompleteTypeAssemblies(typeof(INoImplInterface).Assembly);
+
+			var container = sut.Herd();
+
+			var result = container.GetInstance<ISingleTypeCollectionHolder>();
+
+			Assert.Single(result.Collection);
 		}
 	}
 }
