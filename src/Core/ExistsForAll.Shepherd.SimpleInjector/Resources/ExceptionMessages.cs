@@ -17,7 +17,15 @@ Another functionality can be provided by overloading Register method or replacin
 
 		public static string DecoratorRegistrationExceptionMessage(Type serviceType, IEnumerable<Type> implTypes) => $@"Shepherd checked if service {serviceType.Name} uses Decorator.
 While one of the implementation is a decorator more than {implTypes.Count()} implementations found. To be able to use decorator please use two implementations or a Shepherd Module for custom registration.";
-		
 
+		public static string AutoRegisterArrayExceptionMessage(Type type)
+		{
+			return $@"Shepherd tried to auto register [{type.FullName}] as array, arrays are not supported as dependecies it should be requested as IEnumerable<>";
+		}
+
+		public static string AutoRegisterCollectionExceptionMessage(Type type)
+		{
+			return $@"Shepherd tried to Auto Register {type.FullName} as a collection, yet no implementation was found.";
+		}
 	}
 }

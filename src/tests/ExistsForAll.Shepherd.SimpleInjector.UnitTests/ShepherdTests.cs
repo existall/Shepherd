@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using ExistsForAll.Shepherd.SimpleInjector.Extensions;
 using ExistsForAll.Shepherd.SimpleInjector.Filters;
 using ExistsForAll.Shepherd.SimpleInjector.UnitTests.Subjects;
@@ -9,19 +10,6 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 {
 	public class ShepherdTests
 	{
-
-		[Fact]
-		public void Herd_FullIntegrationTest1()
-		{
-			var sut = new Shepherd();
-			sut.AddCompleteTypeAssemblies(typeof(INoImplInterface).Assembly);
-			//sut.Options.ServiceIndexer.Filters.Add(new InterfaceAccumulationFilter(typeof(IFilterService)));
-			var container = sut.Herd();
-
-			var singleTypeCollectionHolder = container.GetInstance<ISingleTypeCollectionHolder>();
-			singleTypeCollectionHolder = container.GetInstance<ISingleTypeCollectionHolder>();
-		}
-
 		[Fact]
 		public void Herd_FullIntegrationTest()
 		{
@@ -165,6 +153,20 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 			{
 				Assert.Throws<ActivationException>(() => container.GetInstance(type));
 			}
+		}
+		
+		[Fact]
+		public void Herd_WhenRequestingCollectionAndOnlyOneImpl_ShouldRegisterIt()
+		{
+			var sut = new Shepherd();
+			
+			sut.AddCompleteTypeAssemblies(typeof(INoImplInterface).Assembly);
+			
+			var container = sut.Herd();
+			
+			var result = container.GetInstance<ISingleTypeCollectionHolder>();
+			
+			Assert.Equal(result.Collection.Count(),1);
 		}
 	}
 }

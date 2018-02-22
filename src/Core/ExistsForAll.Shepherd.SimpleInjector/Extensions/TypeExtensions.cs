@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Reflection;
 
 namespace ExistsForAll.Shepherd.SimpleInjector.Extensions
@@ -22,5 +23,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.Extensions
 		public static bool IsInterface(this Type type) => type.Info().IsInterface;
 
 		public static TypeInfo Info(this Type type) => type.GetTypeInfo();
+
+		public static Type[] GetGenericArguments(this Type type) => type.Info().GetGenericArguments();
 	}
 }

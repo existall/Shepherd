@@ -6,10 +6,8 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests.Subjects
 	{
 		public IEnumerable<ISingleTypeCollection> Collection { get; }
 
-		public ISingleTypeCollection[] SingleTypeCollections { get; }
 		public SingleTypeCollectionHolder(IEnumerable<ISingleTypeCollection> singleTypeCollections)
 		{
-			//Collection = collection;
 			Collection = singleTypeCollections;
 		}
 	}
