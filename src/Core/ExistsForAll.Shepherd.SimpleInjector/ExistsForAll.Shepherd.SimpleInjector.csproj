@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard1.5</TargetFramework>
     <Authors>Guy Ludvig</Authors>
@@ -17,8 +17,5 @@ Shepered can act as the application Composition Root.</Description>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="SimpleInjector" Version="4.3.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Builder\" />
   </ItemGroup>
 </Project>
