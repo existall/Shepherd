@@ -16,6 +16,9 @@ Shepered can act as the application Composition Root.</Description>
     <Version>1.5.0</Version>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="SimpleInjector" Version="4.0.12" />
+    <PackageReference Include="SimpleInjector" Version="4.3.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Builder\" />
   </ItemGroup>
 </Project>
