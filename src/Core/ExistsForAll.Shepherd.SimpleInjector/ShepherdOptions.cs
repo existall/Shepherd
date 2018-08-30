@@ -4,7 +4,6 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 {
 	public class ShepherdOptions : IShepherdOptions
 	{
-		public IContainerOptionsConfiguration ConfigureContainerOptions { get; set; } = new DefaultContainerOptionsConfiguration();
 		public IServiceIndexer ServiceIndexer { get; set; } = new ServiceIndexer();
 		public IRegistrationConstraintBehavior RegistrationConstraintBehavior { get; set; } = new RegistrationConstraintBehavior();
 		public IGenericRegistrationBehavior GenericRegistrationBehavior { get; set; } = new GenericRegistrationBehavior();

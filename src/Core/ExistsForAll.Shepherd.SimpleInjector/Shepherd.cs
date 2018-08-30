@@ -36,8 +36,6 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 		{
 			_optionsValidator.ValidateOptions(Options);
 
-			Options?.ConfigureContainerOptions.Configure(Container.Options);
-
 			Container.AddSingleAsCollectionSupport();
 			
 			var allTypes = Assemblies.GetAllTypes()
