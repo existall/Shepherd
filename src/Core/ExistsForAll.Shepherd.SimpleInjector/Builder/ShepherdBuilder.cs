@@ -23,6 +23,8 @@ namespace ExistsForAll.Shepherd.SimpleInjector.Builder
 			action?.Invoke(Shepherd.Assemblies);
 			return this;
 		}
+
+		public object WithModules
 	}
 
 	public interface IAssembliesBuilder
