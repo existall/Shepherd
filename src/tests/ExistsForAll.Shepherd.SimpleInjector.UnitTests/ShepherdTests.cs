@@ -12,10 +12,11 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 		[Fact]
 		public void Herd_FullIntegrationTest()
 		{
-			var sut = new Shepherd();
+			var container = new Container();
+			var sut = new Shepherd(container);
 			sut.AddCompleteTypeAssemblies(typeof(INoImplInterface).Assembly);
 			sut.Options.ServiceIndexer.Filters.Add(new InterfaceAccumulationFilter(typeof(IFilterService)));
-			var container = sut.Herd();
+			sut.Herd();
 
 			try
 			{
@@ -69,11 +70,12 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 		[Fact]
 		public void Herd_ShouldSkipAutoRegistrationMark()
 		{
-			var sut = new Shepherd();
+			var container = new Container();
+			var sut = new Shepherd(container);
 			sut.Options.RegistrationConstraintBehavior =
 				new RegistrationConstraintBehavior() {AttributeType = typeof(SkipRegistrationTestAttribute)};
 			sut.AddCompleteTypeAssemblies(typeof(INoImplInterface).Assembly);
-			var container = sut.Herd();
+			sut.Herd();
 			
 			Assert.Throws<ActivationException>(() => container.GetInstance<IInterfaceWithAttribute>());
 		}
@@ -89,7 +91,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 				new RegistrationConstraintBehavior() {AttributeType = typeof(SkipRegistrationTestAttribute)};
 			sut.AddCompleteTypeAssemblies(typeof(INoImplInterface).Assembly);
 
-			container = sut.Herd();
+			sut.Herd();
 
 			var result = container.GetInstance<IInterfaceWithAttribute>();
 			
@@ -104,7 +106,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 			var sut = new Shepherd(container);
 			sut.AddCompleteTypeAssemblies(typeof(INoImplInterface).Assembly);
 			sut.Options.ServiceIndexer.Filters.Add(new InterfaceAccumulationFilter(typeof(IFilterService)));
-			container = sut.Herd();
+			sut.Herd();
 
 			try
 			{
@@ -159,11 +161,12 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 		[Fact]
 		public void Herd_WhenRequestingCollectionAndOnlyOneImpl_ShouldRegisterIt()
 		{
-			var sut = new Shepherd();
+			var container = new Container();
+			var sut = new Shepherd(container);
 			
 			sut.AddCompleteTypeAssemblies(typeof(INoImplInterface).Assembly);
 			
-			var container = sut.Herd();
+			sut.Herd();
 			
 			var result = container.GetInstance<ISingleTypeCollectionHolder>();
 			
@@ -173,11 +176,12 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 		[Fact]
 		public void Herd_WhenRequestingCollectionHasTwoOrMore_ShouldRegisterIt()
 		{
-			var sut = new Shepherd();
+			var container = new Container();
+			var sut = new Shepherd(container);
 
 			sut.AddCompleteTypeAssemblies(typeof(INoImplInterface).Assembly);
 
-			var container = sut.Herd();
+			sut.Herd();
 
 			var result = container.GetInstance<ISingleTypeCollectionHolder>();
 

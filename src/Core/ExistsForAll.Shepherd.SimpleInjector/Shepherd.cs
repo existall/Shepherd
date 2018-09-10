@@ -15,12 +15,12 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 		public ModuleCollection Modules { get; internal set; } = new ModuleCollection();
 		public IShepherdOptions Options { get; internal set; } = new ShepherdOptions();
 
-		public Shepherd(Container container = null)
+		public Shepherd(Container container)
 			: this(new OptionsValidator(),
 				new ModuleExecutor(),
 				new AutoRegistrationBehavior())
 		{
-			Container = container ?? new Container();
+			Container = container;
 		}
 
 		internal Shepherd(IOptionsValidator optionsValidator,
@@ -32,11 +32,9 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 			_autoRegistrationBehavior = autoRegistrationBehavior;
 		}
 
-		public Container Herd()
+		public void Herd()
 		{
 			_optionsValidator.ValidateOptions(Options);
-
-			Options?.ConfigureContainerOptions.Configure(Container.Options);
 
 			Container.AddSingleAsCollectionSupport();
 			
@@ -51,8 +49,6 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 			_autoRegistrationBehavior.Register(Container, Options, typeIndex, assemblies);
 
 			_modulesExecutor.ExecuteModules(Modules, Container, assemblies, allTypes);
-
-			return Container;
 		}
 	}
 }
