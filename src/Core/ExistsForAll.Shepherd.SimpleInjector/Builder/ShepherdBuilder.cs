@@ -3,7 +3,7 @@ using SimpleInjector;
 
 namespace ExistsForAll.Shepherd.SimpleInjector.Builder
 {
-	public class ShepherdBuilder : IOptionsBuilder, IAssembliesBuilder
+	public class ShepherdBuilder
 	{
 		private Shepherd Shepherd { get; }
 
@@ -12,27 +12,27 @@ namespace ExistsForAll.Shepherd.SimpleInjector.Builder
 			Shepherd = new Shepherd(container);
 		}
 
-		public object WithOptions(Action<IShepherdOptions> action)
+		public ShepherdBuilder WithOptions(Action<IShepherdOptions> action)
 		{
 			action?.Invoke(Shepherd.Options);
 			return this;
 		}
 
-		public object WithAssemblies(Action<AssemblyCollection> action)
+		public ShepherdBuilder WithAssemblies(Action<AssemblyCollection> action)
 		{
 			action?.Invoke(Shepherd.Assemblies);
 			return this;
 		}
 
-		public object WithModules
-	}
+		public ShepherdBuilder WithModules(Action<ModuleCollection> action)
+		{
+			action?.Invoke(Shepherd.Modules);
+			return this;
+		}
 
-	public interface IAssembliesBuilder
-	{
-	}
-
-	public interface IOptionsBuilder
-	{
-		object WithOptions(Action<IShepherdOptions> action);
+		public void Herd()
+		{
+			Shepherd.Herd();
+		}
 	}
 }

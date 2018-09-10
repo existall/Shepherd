@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Text;
+﻿using ExistsForAll.Shepherd.SimpleInjector.Builder;
 using SimpleInjector;
 
-namespace ExistsForAll.Shepherd.SimpleInjector.Builder
+namespace ExistsForAll.Shepherd.SimpleInjector
 {
 	public static class SimpleInjectorExtensions
 	{
