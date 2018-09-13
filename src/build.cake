@@ -61,7 +61,7 @@ Task("Test")
     .IsDependentOn("Build")
     .Does(() =>
     {
-        var projects = GetFiles("./tests/**/*.csproj");
+        var projects = GetFiles("./tests/**/*.UnitTests.csproj");
         foreach(var project in projects)
         {
             var settings = new DotNetCoreTestSettings
@@ -106,14 +106,14 @@ Task("Pack")
 Task("NuGet-Push")
     .IsDependentOn("Pack")
     .Does(() =>
-{	
+{
         var apikey = FileReadText("./params.txt");
-		
+
         foreach (var file in GetFiles("./Artifacts/*.nupkg"))
 		{
 			if (file.ToString().Contains(".symbols.nupkg"))
 			{
-				NuGetPush(file, new NuGetPushSettings 
+				NuGetPush(file, new NuGetPushSettings
 				{
 					Source = "https://api.nuget.org/v3/package",
 					ApiKey = apikey
@@ -121,14 +121,14 @@ Task("NuGet-Push")
 			}
 			else
 			{
-				NuGetPush(file, new NuGetPushSettings 
+				NuGetPush(file, new NuGetPushSettings
 				{
 					Source = "https://api.nuget.org/v3/index.json",
 					ApiKey = apikey
 				});
 			}
 		}
-	
+
 });
 
 Task("Default")
