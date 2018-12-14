@@ -4,14 +4,14 @@ namespace ExistsForAll.Shepherd.SimpleInjector.Extensions
 {
 	public static class ShepherdExtension
 	{
-		public static Shepherd AddCompleteTypeAssemblies(this Shepherd target,Assembly assembly, params Assembly[] assemblies)
+		public static Shepherd AddAssemblies(this Shepherd target,Assembly assembly, params Assembly[] assemblies)
 		{
 			target.Assemblies.AddCompleteTypeAssemblies(assembly, assemblies);
 
 			return target;
 		}
 
-		public static Shepherd AddCompleteTypeAssemby<T>(this Shepherd target)
+		public static Shepherd AddAssemby<T>(this Shepherd target)
 		{
 			var assembly = typeof(T).Info().Assembly;
 
@@ -20,14 +20,14 @@ namespace ExistsForAll.Shepherd.SimpleInjector.Extensions
 			return target;
 		}
 
-		public static Shepherd AddPublicTypesAssemblies(this Shepherd target, Assembly assembly, params Assembly[] assemblies)
+		public static Shepherd AddExportedAssemblies(this Shepherd target, Assembly assembly, params Assembly[] assemblies)
 		{
 			target.Assemblies.AddPublicTypesAssemblies(assembly, assemblies);
 
 			return target;
 		}
 
-		public static Shepherd AddPublicTypesAssemblies<T>(this Shepherd target)
+		public static Shepherd AddEportedAssemblies<T>(this Shepherd target)
 		{
 			var assembly = typeof(T).Info().Assembly;
 

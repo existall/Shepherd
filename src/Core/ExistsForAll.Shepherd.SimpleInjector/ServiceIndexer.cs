@@ -19,51 +19,20 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 
 			var allTypes = applicationTypes.ToArray();
 
-			var mapper = new Dictionary<Type, List<Type>>();
-			var genericMapper = new Dictionary<Type, List<Type>>();
-
-			allTypes.Where(x => x.IsInterface())
+			var serviceMaps = allTypes
+				.Where(x => x.IsInterface())
 				.Where(x => Filters.OfType<IInterfaceAccumulationFilter>()
-				.All(filter => !filter.ShouldExcludeInterface(x)))
-				.ForEach(@interface =>
-				{
-					if (@interface.IsGenericType())
-					{
-						genericMapper.Add(@interface, new List<Type>());
-					}
-					else
-					{
-						mapper.Add(@interface, new List<Type>());
-					}
-				});
+					.All(filter => !filter.ShouldExcludeInterface(x)))
+				.Select(interfaceType =>
 
-			allTypes.Where(x => x.IsClass() && !x.IsAbstract())
-				.Where(x => Filters.OfType<IImplementationAccumulationFilter>()
-				.All(filter => !filter.ShouldExcludeClass(x)))
-				.ForEach(typeCandidate =>
-				{
-					foreach (var @interface in typeCandidate.GetTypeInfo().GetInterfaces())
-					{
-						if (@interface.IsGenericType())
-						{
-							var @class = genericMapper.Where(x => x.Key.GetGenericTypeDefinition() == @interface.GetGenericTypeDefinition())
-							.ToArray();
-
-							if (@class.Any())
-								@class.First().Value.Add(typeCandidate);
-
-							continue;
-						}
-
-						if (mapper.ContainsKey(@interface))
-							mapper[@interface].Add(typeCandidate);
-					}
-				});
-
-			return genericMapper.Concat(mapper)
-				.Where(x => x.Value != null)
-				.Select(x => new ServiceTypeMap(x.Key, x.Value))
+					new ServiceTypeMap(interfaceType,
+						allTypes.Where(x => !x.IsAbstract() && x.IsClass() && x.IsAssignableTo(interfaceType))
+							.Where(x => Filters.OfType<IImplementationAccumulationFilter>()
+								.All(filter => !filter.ShouldExcludeClass(x)))
+							.ToArray()))
 				.ToArray();
+
+			return serviceMaps;
 		}
 	}
 }

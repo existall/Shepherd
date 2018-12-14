@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
+using Microsoft.Extensions.Internal;
+
 
 namespace ExistsForAll.Shepherd.SimpleInjector.Extensions
 {
@@ -10,7 +13,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.Extensions
 		public static bool IsGenericType(this Type type) => type.Info().IsGenericType;
 
 		public static bool IsGenericTypeDefinition(this Type type) => type.Info().IsGenericType;
-		
+
 		public static Type GetGenericTypeDefinition(this Type type) => type.Info().GetGenericTypeDefinition();
 
 		public static bool IsClass(this Type type) => type.Info().IsClass;
@@ -24,5 +27,64 @@ namespace ExistsForAll.Shepherd.SimpleInjector.Extensions
 		public static TypeInfo Info(this Type type) => type.GetTypeInfo();
 
 		public static Type[] GetGenericArguments(this Type type) => type.Info().GetGenericArguments();
+
+	    public static string ToFriendlyName(this Type type)
+	    {
+	        return TypeNameHelper.GetTypeDisplayName(type, includeGenericParameterNames: true);
+	    }
+
+	    public static bool IsAssignableTo(this Type type, Type otherType)
+	    {
+	        var typeInfo = type.GetTypeInfo();
+	        var otherTypeInfo = otherType.GetTypeInfo();
+
+	        if (otherTypeInfo.IsGenericTypeDefinition)
+	        {
+	            return typeInfo.IsAssignableToGenericTypeDefinition(otherTypeInfo);
+	        }
+
+	        return otherTypeInfo.IsAssignableFrom(typeInfo);
+	    }
+
+	    private static bool IsAssignableToGenericTypeDefinition(this TypeInfo typeInfo, TypeInfo genericTypeInfo)
+	    {
+	        var interfaceTypes = typeInfo.ImplementedInterfaces.Select(t => t.GetTypeInfo());
+
+	        foreach (var interfaceType in interfaceTypes)
+	        {
+		        if (!interfaceType.IsGenericType)
+			        continue;
+		        
+		        var typeDefinitionTypeInfo = interfaceType
+			        .GetGenericTypeDefinition()
+			        .GetTypeInfo();
+
+		        if (typeDefinitionTypeInfo.Equals(genericTypeInfo))
+		        {
+			        return true;
+		        }
+	        }
+
+	        if (typeInfo.IsGenericType)
+	        {
+	            var typeDefinitionTypeInfo = typeInfo
+	                .GetGenericTypeDefinition()
+	                .GetTypeInfo();
+
+	            if (typeDefinitionTypeInfo.Equals(genericTypeInfo))
+	            {
+	                return true;
+	            }
+	        }
+
+	        var baseTypeInfo = typeInfo.BaseType?.GetTypeInfo();
+
+	        if (baseTypeInfo == null)
+	        {
+	            return false;
+	        }
+
+	        return baseTypeInfo.IsAssignableToGenericTypeDefinition(genericTypeInfo);
+	    }
 	}
 }

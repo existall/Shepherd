@@ -14,7 +14,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 		{
 			var container = new Container();
 			var sut = new Shepherd(container);
-			sut.AddCompleteTypeAssemblies(typeof(INoImplInterface).Assembly);
+			sut.AddAssemblies(typeof(INoImplInterface).Assembly);
 			sut.Options.ServiceIndexer.Filters.Add(new InterfaceAccumulationFilter(typeof(IFilterService)));
 			sut.Herd();
 
@@ -74,7 +74,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 			var sut = new Shepherd(container);
 			sut.Options.RegistrationConstraintBehavior =
 				new RegistrationConstraintBehavior() {AttributeType = typeof(SkipRegistrationTestAttribute)};
-			sut.AddCompleteTypeAssemblies(typeof(INoImplInterface).Assembly);
+			sut.AddAssemblies(typeof(INoImplInterface).Assembly);
 			sut.Herd();
 			
 			Assert.Throws<ActivationException>(() => container.GetInstance<IInterfaceWithAttribute>());
@@ -89,7 +89,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 			container.Register<IInterfaceWithAttribute, InterfaceWithAttribute>();
 			sut.Options.RegistrationConstraintBehavior =
 				new RegistrationConstraintBehavior() {AttributeType = typeof(SkipRegistrationTestAttribute)};
-			sut.AddCompleteTypeAssemblies(typeof(INoImplInterface).Assembly);
+			sut.AddAssemblies(typeof(INoImplInterface).Assembly);
 
 			sut.Herd();
 
@@ -104,7 +104,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 			var container = new Container();
 
 			var sut = new Shepherd(container);
-			sut.AddCompleteTypeAssemblies(typeof(INoImplInterface).Assembly);
+			sut.AddAssemblies(typeof(INoImplInterface).Assembly);
 			sut.Options.ServiceIndexer.Filters.Add(new InterfaceAccumulationFilter(typeof(IFilterService)));
 			sut.Herd();
 
@@ -164,7 +164,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 			var container = new Container();
 			var sut = new Shepherd(container);
 			
-			sut.AddCompleteTypeAssemblies(typeof(INoImplInterface).Assembly);
+			sut.AddAssemblies(typeof(INoImplInterface).Assembly);
 			
 			sut.Herd();
 			
@@ -179,7 +179,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 			var container = new Container();
 			var sut = new Shepherd(container);
 
-			sut.AddCompleteTypeAssemblies(typeof(INoImplInterface).Assembly);
+			sut.AddAssemblies(typeof(INoImplInterface).Assembly);
 
 			sut.Herd();
 

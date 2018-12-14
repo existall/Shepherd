@@ -12,7 +12,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.RegistrationActions
 
 		public virtual void Register(IRegistrationContext context, Container container)
 		{
-			container.RegisterCollection(context.ServiceType, context.ImplementationTypes);
+			container.Collection.Register(context.ServiceType, context.ImplementationTypes);
 		}
 	}
 }
