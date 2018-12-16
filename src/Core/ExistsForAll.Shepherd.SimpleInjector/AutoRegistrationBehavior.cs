@@ -22,7 +22,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 
 			foreach (var index in typeIndex)
 			{
-				var candidateDescriptor = new ServiceDescriptor(index.ServiceType, index.ImplementationTypes);
+				var candidateDescriptor = new RegistrationActions.ServiceTypeMap(index.ServiceType, index.ImplementationTypes);
 
 				if (options.RegistrationConstraintBehavior.ShouldSkipAutoRegistration(candidateDescriptor))
 				{
@@ -34,16 +34,16 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 		}
 
 		private static void IterateActions(List<IRegistrationBehavior> actions,
-			IServiceDescriptor serviceDescriptor,
+			IServiceTypeMap serviceTypeMap,
 			Container container,
 			Assembly[] assemblies)
 		{
 			foreach (var action in actions)
 			{
-				if (action.ShouldRegister(serviceDescriptor))
+				if (action.ShouldRegister(serviceTypeMap))
 				{
-					action.Register(new RegistrationContext(serviceDescriptor.ServiceType,
-							serviceDescriptor.ImplementationTypes,
+					action.Register(new RegistrationContext(serviceTypeMap.ServiceType,
+							serviceTypeMap.ImplementationTypes,
 							assemblies),
 						container);
 					return;

@@ -82,7 +82,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 			}
 		}
 
-		private IServiceDescriptor BuildDescriptor(Type type, params Type[] types)
+		private IServiceTypeMap BuildDescriptor(Type type, params Type[] types)
 		{
 			return TestUtils.BuildServiceDescriptor(typeof(IInterface), type, types);
 		}

@@ -6,14 +6,14 @@ namespace ExistsForAll.Shepherd.SimpleInjector.Extensions
 {
 	internal static class InternalShepherdExtensions
 	{
-		public static IRegistrationContext AsRegistrationContext(this IServiceDescriptor serviceDescriptor, IEnumerable<Assembly> assemblies)
+		public static IRegistrationContext AsRegistrationContext(this IServiceTypeMap serviceTypeMap, IEnumerable<Assembly> assemblies)
 		{
-			return new RegistrationContext(serviceDescriptor.ServiceType, serviceDescriptor.ImplementationTypes, assemblies);
+			return new RegistrationContext(serviceTypeMap.ServiceType, serviceTypeMap.ImplementationTypes, assemblies);
 		}
 
-		public static IServiceDescriptor AsServiceDescriptor(this IRegistrationContext context)
+		public static IServiceTypeMap AsServiceDescriptor(this IRegistrationContext context)
 		{
-			return new ServiceDescriptor(context.ServiceType, context.ImplementationTypes);
+			return new RegistrationActions.ServiceTypeMap(context.ServiceType, context.ImplementationTypes);
 		}
 	}
 }

@@ -7,19 +7,19 @@ namespace ExistsForAll.Shepherd.SimpleInjector.RegistrationActions
 {
 	public class DecoratorRegistrationBehavior : IDecoratorRegistrationBehavior
 	{
-		public virtual bool ShouldRegister(IServiceDescriptor descriptor)
+		public virtual bool ShouldRegister(IServiceTypeMap typeMap)
 		{
-			var count = descriptor.ImplementationTypes.Count();
+			var count = typeMap.ImplementationTypes.Count();
 
 			if (count <= 1)
 				return false;
 
-			var shouldRegister =  descriptor.ImplementationTypes
+			var shouldRegister =  typeMap.ImplementationTypes
 				.Any(implementationType =>
-					HasSameServiceAsDependency(implementationType, descriptor.ServiceType));
+					HasSameServiceAsDependency(implementationType, typeMap.ServiceType));
 
 			if(shouldRegister && count != 2)
-				throw new DecoratorRegistrationException(descriptor);
+				throw new DecoratorRegistrationException(typeMap);
 
 			return shouldRegister;
 		}

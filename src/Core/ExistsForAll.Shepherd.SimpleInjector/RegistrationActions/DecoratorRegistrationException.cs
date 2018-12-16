@@ -5,19 +5,19 @@ namespace ExistsForAll.Shepherd.SimpleInjector.RegistrationActions
 {
 	public class DecoratorRegistrationException : Exception
 	{
-		public DecoratorRegistrationException(IServiceDescriptor serviceDescriptor)
-			: base(GetMessage(serviceDescriptor))
+		public DecoratorRegistrationException(IServiceTypeMap serviceTypeMap)
+			: base(GetMessage(serviceTypeMap))
 		{
 		}
 
-		public DecoratorRegistrationException(IServiceDescriptor serviceDescriptor, Exception inner)
-			: base(GetMessage(serviceDescriptor), inner)
+		public DecoratorRegistrationException(IServiceTypeMap serviceTypeMap, Exception inner)
+			: base(GetMessage(serviceTypeMap), inner)
 		{
 		}
 
-		private static string GetMessage(IServiceDescriptor serviceDescriptor) =>
-			ExceptionMessages.DecoratorRegistrationExceptionMessage(serviceDescriptor.ServiceType,
-				serviceDescriptor.ImplementationTypes);
+		private static string GetMessage(IServiceTypeMap serviceTypeMap) =>
+			ExceptionMessages.DecoratorRegistrationExceptionMessage(serviceTypeMap.ServiceType,
+				serviceTypeMap.ImplementationTypes);
 
 	}
 }

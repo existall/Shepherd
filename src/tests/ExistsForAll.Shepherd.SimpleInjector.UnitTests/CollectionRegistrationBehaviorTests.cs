@@ -27,7 +27,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 			Assert.True(result);
 		}
 
-		private IServiceDescriptor BuildDescriptor(Type type, params Type[] types)
+		private IServiceTypeMap BuildDescriptor(Type type, params Type[] types)
 		{
 			return BuildServiceDescriptor(GetType<IInterface>(), type, types);
 		}

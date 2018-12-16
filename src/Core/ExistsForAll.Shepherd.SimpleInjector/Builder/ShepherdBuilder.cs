@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Reflection;
 using ExistsForAll.Shepherd.SimpleInjector.Extensions;
-using SimpleInjector;
+using ExistsForAll.Shepherd.SimpleInjector.Filters;
+using ExistsForAll.Shepherd.SimpleInjector.RegistrationActions;
 
 namespace ExistsForAll.Shepherd.SimpleInjector.Builder
 {
@@ -28,6 +29,53 @@ namespace ExistsForAll.Shepherd.SimpleInjector.Builder
 		public static ShepherdBuilder UseServiceIndexer(this ShepherdBuilder target, IServiceIndexer serviceIndexer)
 		{
 			target.WithOptions(x => x.ServiceIndexer = serviceIndexer);
+
+			return target;
+		}
+
+		public static ShepherdBuilder UseServiceIndexerFilter(this ShepherdBuilder target, IFilter filter)
+		{
+			target.WithOptions(x => x.ServiceIndexer.Filters.Add(filter));
+
+			return target;
+		}
+
+		public static ShepherdBuilder UseCollectionRegistrationBehavior(this ShepherdBuilder target,
+			ICollectionRegistrationBehavior behavior)
+		{
+			target.WithOptions(x => x.CollectionRegistrationBehavior = behavior);
+
+			return target;
+		}
+
+		public static ShepherdBuilder UseDecoratorRegistrationBehavior(this ShepherdBuilder target,
+			IDecoratorRegistrationBehavior behavior)
+		{
+			target.WithOptions(x => x.DecoratorRegistrationBehavior = behavior);
+
+			return target;
+		}
+
+		public static ShepherdBuilder UseGenericRegistrationBehavior(this ShepherdBuilder target,
+			IGenericRegistrationBehavior behavior)
+		{
+			target.WithOptions(x => x.GenericRegistrationBehavior = behavior);
+
+			return target;
+		}
+
+		public static ShepherdBuilder UseRegistrationConstraintBehavior(this ShepherdBuilder target,
+			IRegistrationConstraintBehavior behavior)
+		{
+			target.WithOptions(x => x.RegistrationConstraintBehavior = behavior);
+
+			return target;
+		}
+
+		public static ShepherdBuilder UseSingleServiceRegistrationBehavior(this ShepherdBuilder target,
+			ISingleServiceRegistrationBehavior behavior)
+		{
+			target.WithOptions(x => x.SingleServiceRegistrationBehavior = behavior);
 
 			return target;
 		}

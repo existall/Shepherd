@@ -10,15 +10,15 @@ namespace ExistsForAll.Shepherd.SimpleInjector
 	{
 		public Type AttributeType { get; set; } = typeof(SkipRegistrationAttribute);
 
-		public virtual bool ShouldSkipAutoRegistration(IServiceDescriptor descriptor)
+		public virtual bool ShouldSkipAutoRegistration(IServiceTypeMap typeMap)
 		{
 			if (AttributeType == null)
 				throw new AutoRegistrationException(ExceptionMessages.SkipRegistrationMessage);
 
-			if (descriptor.ServiceType.GetTypeInfo().GetCustomAttribute(AttributeType) != null)
+			if (typeMap.ServiceType.GetTypeInfo().GetCustomAttribute(AttributeType) != null)
 				return true;
 
-			return !descriptor.ImplementationTypes.Any();
+			return !typeMap.ImplementationTypes.Any();
 		}
 	}
 }

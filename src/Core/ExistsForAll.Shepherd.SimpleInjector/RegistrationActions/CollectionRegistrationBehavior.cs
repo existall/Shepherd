@@ -5,9 +5,9 @@ namespace ExistsForAll.Shepherd.SimpleInjector.RegistrationActions
 {
 	public class CollectionRegistrationBehavior : ICollectionRegistrationBehavior
 	{
-		public virtual bool ShouldRegister(IServiceDescriptor descriptor)
+		public virtual bool ShouldRegister(IServiceTypeMap typeMap)
 		{
-			return descriptor.ImplementationTypes.Count() > 1;
+			return typeMap.ImplementationTypes.Count() > 1;
 		}
 
 		public virtual void Register(IRegistrationContext context, Container container)

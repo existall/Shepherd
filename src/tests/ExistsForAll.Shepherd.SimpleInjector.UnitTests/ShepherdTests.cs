@@ -1,4 +1,5 @@
 ﻿using System;
+using ExistsForAll.Shepherd.SimpleInjector.Builder;
 using ExistsForAll.Shepherd.SimpleInjector.Extensions;
 using ExistsForAll.Shepherd.SimpleInjector.Filters;
 using ExistsForAll.Shepherd.SimpleInjector.UnitTests.Subjects;
@@ -12,11 +13,9 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 		[Fact]
 		public void Herd_FullIntegrationTest()
 		{
-			var container = new Container();
-			var sut = new Shepherd(container);
-			sut.AddAssemblies(typeof(INoImplInterface).Assembly);
-			sut.Options.ServiceIndexer.Filters.Add(new InterfaceAccumulationFilter(typeof(IFilterService)));
-			sut.Herd();
+			var container = new Container()
+				.Scan(x => x.WithAssembly<INoImplInterface>()
+					.UseServiceIndexerFilter(new InterfaceAccumulationFilter(typeof(IFilterService))));
 
 			try
 			{
