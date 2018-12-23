@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using ExistsForAll.Shepherd.Core.RegistrationActions;
 using ExistsForAll.Shepherd.Core.Resources;
 
 namespace ExistsForAll.Shepherd.Core

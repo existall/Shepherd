@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ExistsForAll.Shepherd.Core
 {
-	public struct ServiceTypeMap
+	public struct ServiceTypeMap : IServiceTypeMap
 	{
 		public Type ServiceType { get; }
 		public IEnumerable<Type> ImplementationTypes { get; }
@@ -13,5 +13,11 @@ namespace ExistsForAll.Shepherd.Core
 			ServiceType = serviceType;
 			ImplementationTypes = implementationTypes;
 		}
+	}
+
+	public interface IServiceTypeMap
+	{
+		Type ServiceType { get; }
+		IEnumerable<Type> ImplementationTypes { get; }
 	}
 }

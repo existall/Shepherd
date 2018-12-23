@@ -1,7 +1,8 @@
 ﻿using System;
+using ExistsForAll.Shepherd.Core;
 using Xunit;
 
-namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
+namespace ExistsForAll.Shepherd.SimpleInjector2.UnitTests
 {
 	public class RegistrationConstraintBehaviorTests
 	{
@@ -11,7 +12,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 			var sut = BuildSut();
 
 			var result = sut.ShouldSkipAutoRegistration(
-				new RegistrationActions.ServiceTypeMap(typeof(IInterfaceWithAttribute),
+				new ServiceTypeMap(typeof(IInterfaceWithAttribute),
 					new[] {typeof(InterfaceWithAttribute)})
 			);
 
@@ -24,7 +25,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 			var sut = BuildSut();
 
 			var result = sut.ShouldSkipAutoRegistration(
-				new RegistrationActions.ServiceTypeMap(typeof(IInterfaceWithOutAttribute),
+				new ServiceTypeMap(typeof(IInterfaceWithOutAttribute),
 					new[] {typeof(InterfaceWithOutAttribute)})
 			);
 
@@ -39,7 +40,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 			sut.AttributeType = typeof(SomeAttribute);
 
 			var result = sut.ShouldSkipAutoRegistration(
-				new RegistrationActions.ServiceTypeMap(typeof(IInterfaceWithNewAttribute),
+				new ServiceTypeMap(typeof(IInterfaceWithNewAttribute),
 					new[] {typeof(InterfaceWithNewAttribute)})
 			);
 
@@ -54,7 +55,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 			sut.AttributeType = typeof(SomeAttribute);
 
 			var result = sut.ShouldSkipAutoRegistration(
-				new RegistrationActions.ServiceTypeMap(typeof(IInterfaceWithOutAttribute),
+				new ServiceTypeMap(typeof(IInterfaceWithOutAttribute),
 					new[] {typeof(InterfaceWithOutAttribute)})
 			);
 
@@ -69,7 +70,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 			sut.AttributeType = typeof(SomeAttribute);
 
 			var result = sut.ShouldSkipAutoRegistration(
-				new RegistrationActions.ServiceTypeMap(typeof(IInterfaceWithAttribute),
+				new ServiceTypeMap(typeof(IInterfaceWithAttribute),
 					new[] {typeof(InterfaceWithAttribute)})
 			);
 

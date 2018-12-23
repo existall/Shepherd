@@ -21,7 +21,7 @@ namespace ExistsForAll.Shepherd.Core
 
 			foreach (var index in typeIndex)
 			{
-				var candidateDescriptor = new RegistrationActions.ServiceTypeMap(index.ServiceType, index.ImplementationTypes);
+				var candidateDescriptor = new ServiceTypeMap(index.ServiceType, index.ImplementationTypes);
 
 				if (options.RegistrationConstraintBehavior.ShouldSkipAutoRegistration(candidateDescriptor))
 				{

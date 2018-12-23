@@ -17,7 +17,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExistsForAll.Shepherd.Simpl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExistsForAll.Shepherd.SimpleInjector.UnitTests.Subjects", "tests\ExistsForAll.Shepherd.SimpleInjector.UnitTests.Subjects\ExistsForAll.Shepherd.SimpleInjector.UnitTests.Subjects.csproj", "{8CB875CE-6752-41CA-87BB-10576F5F3E18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExistsForAll.Shepherd.Core", "Core\ExistsForAll.Shepherd.Core\ExistsForAll.Shepherd.Core.csproj", "{19701B81-7DE2-46AC-A454-5F5F899DDA17}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExistsForAll.Shepherd.Core", "Core\ExistsForAll.Shepherd.Core\ExistsForAll.Shepherd.Core.csproj", "{19701B81-7DE2-46AC-A454-5F5F899DDA17}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExistsForAll.Shepherd.SimpleInjector.2", "Core\ExistsForAll.Shepherd.SimpleInjector.2\ExistsForAll.Shepherd.SimpleInjector.2.csproj", "{53B88B15-95F7-4CCC-876E-63A07F819C83}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExistsForAll.Shepherd.SimpleInjector2.UnitTests", "tests\ExistsForAll.Shepherd.SimpleInjector2.UnitTests\ExistsForAll.Shepherd.SimpleInjector2.UnitTests.csproj", "{C802920E-6C05-4F04-8F09-A0AA90145E87}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +49,14 @@ Global
 		{19701B81-7DE2-46AC-A454-5F5F899DDA17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19701B81-7DE2-46AC-A454-5F5F899DDA17}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19701B81-7DE2-46AC-A454-5F5F899DDA17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53B88B15-95F7-4CCC-876E-63A07F819C83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53B88B15-95F7-4CCC-876E-63A07F819C83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53B88B15-95F7-4CCC-876E-63A07F819C83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53B88B15-95F7-4CCC-876E-63A07F819C83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C802920E-6C05-4F04-8F09-A0AA90145E87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C802920E-6C05-4F04-8F09-A0AA90145E87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C802920E-6C05-4F04-8F09-A0AA90145E87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C802920E-6C05-4F04-8F09-A0AA90145E87}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +67,8 @@ Global
 		{AF23FAFE-4412-4F79-8DE8-BAB598A36C2E} = {438B970D-B358-4808-B300-06E751728CDA}
 		{8CB875CE-6752-41CA-87BB-10576F5F3E18} = {A0EB46E4-DBE5-47F8-BFB7-6AACB3AD88B4}
 		{19701B81-7DE2-46AC-A454-5F5F899DDA17} = {438B970D-B358-4808-B300-06E751728CDA}
+		{53B88B15-95F7-4CCC-876E-63A07F819C83} = {438B970D-B358-4808-B300-06E751728CDA}
+		{C802920E-6C05-4F04-8F09-A0AA90145E87} = {A0EB46E4-DBE5-47F8-BFB7-6AACB3AD88B4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8616ED98-2EF3-4147-8359-D19461B35672}

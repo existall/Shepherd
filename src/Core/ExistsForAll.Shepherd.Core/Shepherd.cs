@@ -12,7 +12,7 @@ namespace ExistsForAll.Shepherd.Core
 
 		public AssemblyCollection Assemblies { get; internal set; } = new AssemblyCollection();
 		public ModuleCollection<TContainer> Modules { get; internal set; } = new ModuleCollection<TContainer>();
-		public abstract IShepherdOptions<TContainer> Options { get; internal set; }
+		public abstract IShepherdOptions<TContainer> Options { get; protected set; }
 
 		protected Shepherd(TContainer container)
 			: this(new OptionsValidator<TContainer>(),

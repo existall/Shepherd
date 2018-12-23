@@ -1,6 +1,4 @@
-﻿using ExistsForAll.Shepherd.Core.RegistrationActions;
-
-namespace ExistsForAll.Shepherd.Core
+﻿namespace ExistsForAll.Shepherd.Core
 {
 	public interface IRegistrationConstraintBehavior
 	{

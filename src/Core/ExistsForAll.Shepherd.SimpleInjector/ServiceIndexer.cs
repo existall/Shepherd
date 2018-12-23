@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using ExistsForAll.Shepherd.SimpleInjector.Extensions;
 using ExistsForAll.Shepherd.SimpleInjector.Filters;
 using ExistsForAll.Shepherd.SimpleInjector.Resources;

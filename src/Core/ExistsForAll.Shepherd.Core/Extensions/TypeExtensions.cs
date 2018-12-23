@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace ExistsForAll.Shepherd.Core.Extensions
 {
-	internal static class TypeExtensions
+	public static class TypeExtensions
 	{
 		public static bool IsGeneric(this Type target) => target.IsGenericType() || target.IsGenericTypeDefinition();
 
