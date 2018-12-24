@@ -15,6 +15,7 @@ namespace ExistsForAll.Shepherd.DependencyInjection.UnitTests
 		{
 			var sut = new ServiceCollection()
 			    .Scan(x => x.WithAssembly<INoImplInterface>()
+				    .SetDefaultLifetime(ServiceLifetime.Singleton)
 			        .WithOptions(o => o.ServiceIndexer
 				        .Filters
 				        .Add(new InterfaceAccumulationFilter(typeof(IFilterService)))));
