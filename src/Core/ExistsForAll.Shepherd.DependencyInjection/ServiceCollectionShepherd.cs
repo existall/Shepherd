@@ -1,15 +1,18 @@
 using ExistsForAll.Shepherd.Core;
+using ExistsForAll.Shepherd.Core.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ExistsForAll.Shepherd.DependencyInjection
 {
 	public class ServiceCollectionShepherd : Shepherd<IServiceCollection>
 	{
-		public ServiceCollectionShepherd(IServiceCollection container) 
+		public ServiceCollectionShepherd(IServiceCollection container)
 			: base(container)
 		{
+			
+			Options.Items.AddOrUpdate(RegistrationContextExtensions.DefaultLifeStyle, ServiceLifetime.Transient);
 		}
 
-		public override IShepherdOptions<IServiceCollection> Options { get; protected set; } = new ServiceCollectionOptions();
+		public sealed override IShepherdOptions<IServiceCollection> Options { get; protected set; } = new ServiceCollectionOptions();
 	}
 }

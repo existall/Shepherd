@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace ExistsForAll.Shepherd.DependencyInjection
 {
-    public static partial class ServiceCollectionExtensions
+	public static partial class ServiceCollectionExtensions
     {
 	    public static IServiceCollection Scan(this IServiceCollection target,
 		    Action<ShepherdBuilder<IServiceCollection>> action)

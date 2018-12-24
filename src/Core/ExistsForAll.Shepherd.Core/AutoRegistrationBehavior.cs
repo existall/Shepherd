@@ -28,23 +28,32 @@ namespace ExistsForAll.Shepherd.Core
 					continue;
 				}
 
-				IterateActions(actions,candidateDescriptor,container,assemblies);
+				IterateActions(actions, candidateDescriptor, container, assemblies, options);
 			}
 		}
 
 		private static void IterateActions(List<IRegistrationBehavior<TContainer>> actions,
 			IServiceTypeMap serviceTypeMap,
 			TContainer container,
-			Assembly[] assemblies)
+			Assembly[] assemblies,
+			IShepherdOptions<TContainer> options)
 		{
+
+			var context = new RegistrationContext<TContainer>(serviceTypeMap.ServiceType,
+				serviceTypeMap.ImplementationTypes,
+				assemblies,
+				container);
+
+			foreach (var item in options.Items)
+			{
+				context.Properties.Add(item.Key, item.Value);
+			}
+			
 			foreach (var action in actions)
 			{
 				if (action.ShouldRegister(serviceTypeMap))
 				{
-					action.Register(new RegistrationContext<TContainer>(serviceTypeMap.ServiceType,
-						serviceTypeMap.ImplementationTypes,
-						assemblies,
-						container));
+					action.Register(context);
 					return;
 				}
 			}
