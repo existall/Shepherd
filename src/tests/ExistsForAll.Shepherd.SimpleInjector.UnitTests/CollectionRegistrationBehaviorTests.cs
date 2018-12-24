@@ -1,7 +1,6 @@
 using System;
-using ExistsForAll.Shepherd.SimpleInjector.RegistrationActions;
+using ExistsForAll.Shepherd.Core;
 using Xunit;
-using static ExistsForAll.Shepherd.SimpleInjector.UnitTests.TestUtils;
 
 namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 {
@@ -11,7 +10,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 		public void ShouldRegister_WhenHaveLessThanTwoImpl_ShouldReturnFalse()
 		{
 			var sut = BuildSut();
-			var descriptor = BuildDescriptor(GetType<Interface>());
+			var descriptor = BuildDescriptor(TestUtils.GetType<Interface>());
 
 			var result = sut.ShouldRegister(descriptor);
 			Assert.False(result);
@@ -21,15 +20,15 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 		public void ShouldRegister_WhenHaveMoreThanOneImpl_ShouldReturnFalse()
 		{
 			var sut = BuildSut();
-			var descriptor = BuildDescriptor(GetType<Interface>(), GetType<Interface1>());
+			var descriptor = BuildDescriptor(TestUtils.GetType<Interface>(), TestUtils.GetType<Interface1>());
 
 			var result = sut.ShouldRegister(descriptor);
 			Assert.True(result);
 		}
 
-		private IServiceDescriptor BuildDescriptor(Type type, params Type[] types)
+		private IServiceTypeMap BuildDescriptor(Type type, params Type[] types)
 		{
-			return BuildServiceDescriptor(GetType<IInterface>(), type, types);
+			return TestUtils.BuildServiceDescriptor(TestUtils.GetType<IInterface>(), type, types);
 		}
 
 		private static CollectionRegistrationBehavior BuildSut()

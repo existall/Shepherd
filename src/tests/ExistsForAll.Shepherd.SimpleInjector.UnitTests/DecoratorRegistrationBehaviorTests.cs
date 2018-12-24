@@ -1,7 +1,7 @@
 ﻿using System;
-using ExistsForAll.Shepherd.SimpleInjector.RegistrationActions;
+using ExistsForAll.Shepherd.Core;
+using ExistsForAll.Shepherd.Core.RegistrationActions;
 using Xunit;
-using static ExistsForAll.Shepherd.SimpleInjector.UnitTests.TestUtils;
 
 namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 {
@@ -12,7 +12,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 		{
 			var sut = BuildSut();
 
-			var serviceDescriptor = BuildDescriptor(GetType<Interface>());
+			var serviceDescriptor = BuildDescriptor(TestUtils.GetType<Interface>());
 
 			var result = sut.ShouldRegister(serviceDescriptor);
 
@@ -24,7 +24,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 		{
 			var sut = BuildSut();
 
-			var serviceDescriptor = BuildDescriptor(GetType<Interface>(), GetType<AnotherInterface>());
+			var serviceDescriptor = BuildDescriptor(TestUtils.GetType<Interface>(), TestUtils.GetType<AnotherInterface>());
 
 			var result = sut.ShouldRegister(serviceDescriptor);
 
@@ -36,7 +36,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 		{
 			var sut = BuildSut();
 
-			var serviceDescriptor = BuildDescriptor(GetType<Interface>(), GetType<Decorator>());
+			var serviceDescriptor = BuildDescriptor(TestUtils.GetType<Interface>(), TestUtils.GetType<Decorator>());
 
 			var result = sut.ShouldRegister(serviceDescriptor);
 
@@ -48,7 +48,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 		{
 			var sut = BuildSut();
 
-			var serviceDescriptor = BuildDescriptor(GetType<Interface>(), GetType<Decorator>(), GetType<AnotherInterface>());
+			var serviceDescriptor = BuildDescriptor(TestUtils.GetType<Interface>(), TestUtils.GetType<Decorator>(), TestUtils.GetType<AnotherInterface>());
 
 			Assert.Throws<DecoratorRegistrationException>(() => sut.ShouldRegister(serviceDescriptor));
 		}
@@ -82,7 +82,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 			}
 		}
 
-		private IServiceDescriptor BuildDescriptor(Type type, params Type[] types)
+		private IServiceTypeMap BuildDescriptor(Type type, params Type[] types)
 		{
 			return TestUtils.BuildServiceDescriptor(typeof(IInterface), type, types);
 		}

@@ -1,7 +1,8 @@
 ﻿using System;
-using System.Linq;
-using ExistsForAll.Shepherd.SimpleInjector.Filters;
+using ExistsForAll.Shepherd.Core;
+using ExistsForAll.Shepherd.Core.Filters;
 using Xunit;
+using System.Linq;
 
 namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 {

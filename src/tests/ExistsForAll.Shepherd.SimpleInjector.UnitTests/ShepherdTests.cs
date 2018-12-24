@@ -1,6 +1,6 @@
 ﻿using System;
-using ExistsForAll.Shepherd.SimpleInjector.Extensions;
-using ExistsForAll.Shepherd.SimpleInjector.Filters;
+using ExistsForAll.Shepherd.Core;
+using ExistsForAll.Shepherd.Core.Filters;
 using ExistsForAll.Shepherd.SimpleInjector.UnitTests.Subjects;
 using SimpleInjector;
 using Xunit;
@@ -12,11 +12,9 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 		[Fact]
 		public void Herd_FullIntegrationTest()
 		{
-			var container = new Container();
-			var sut = new Shepherd(container);
-			sut.AddCompleteTypeAssemblies(typeof(INoImplInterface).Assembly);
-			sut.Options.ServiceIndexer.Filters.Add(new InterfaceAccumulationFilter(typeof(IFilterService)));
-			sut.Herd();
+			var container = new Container()
+				.Scan(x => x.WithAssembly<INoImplInterface>()
+					.UseServiceIndexerFilter(new InterfaceAccumulationFilter(typeof(IFilterService))));
 
 			try
 			{
@@ -71,10 +69,10 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 		public void Herd_ShouldSkipAutoRegistrationMark()
 		{
 			var container = new Container();
-			var sut = new Shepherd(container);
+			var sut = new SimpleInjectorShepherd(container);
 			sut.Options.RegistrationConstraintBehavior =
 				new RegistrationConstraintBehavior() {AttributeType = typeof(SkipRegistrationTestAttribute)};
-			sut.AddCompleteTypeAssemblies(typeof(INoImplInterface).Assembly);
+			sut.Assemblies.Add(new AssemblyLoader(typeof(INoImplInterface).Assembly));
 			sut.Herd();
 			
 			Assert.Throws<ActivationException>(() => container.GetInstance<IInterfaceWithAttribute>());
@@ -84,13 +82,12 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 		public void Herd_WhenAlreadyRegistered_ShouldSkipAutoRegistrationMark()
 		{
 			var container = new Container();
-			var sut = new Shepherd(container);
+			var sut = new SimpleInjectorShepherd(container);
 
 			container.Register<IInterfaceWithAttribute, InterfaceWithAttribute>();
 			sut.Options.RegistrationConstraintBehavior =
 				new RegistrationConstraintBehavior() {AttributeType = typeof(SkipRegistrationTestAttribute)};
-			sut.AddCompleteTypeAssemblies(typeof(INoImplInterface).Assembly);
-
+			sut.Assemblies.Add(new AssemblyLoader(typeof(INoImplInterface).Assembly));
 			sut.Herd();
 
 			var result = container.GetInstance<IInterfaceWithAttribute>();
@@ -103,8 +100,8 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 		{
 			var container = new Container();
 
-			var sut = new Shepherd(container);
-			sut.AddCompleteTypeAssemblies(typeof(INoImplInterface).Assembly);
+			var sut = new SimpleInjectorShepherd(container);
+			sut.Assemblies.Add(new AssemblyLoader(typeof(INoImplInterface).Assembly));
 			sut.Options.ServiceIndexer.Filters.Add(new InterfaceAccumulationFilter(typeof(IFilterService)));
 			sut.Herd();
 
@@ -162,9 +159,10 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 		public void Herd_WhenRequestingCollectionAndOnlyOneImpl_ShouldRegisterIt()
 		{
 			var container = new Container();
-			var sut = new Shepherd(container);
+			container.AddSingleAsCollectionSupport();
+			var sut = new SimpleInjectorShepherd(container);
 			
-			sut.AddCompleteTypeAssemblies(typeof(INoImplInterface).Assembly);
+			sut.Assemblies.Add(new AssemblyLoader(typeof(INoImplInterface).Assembly));
 			
 			sut.Herd();
 			
@@ -177,9 +175,9 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 		public void Herd_WhenRequestingCollectionHasTwoOrMore_ShouldRegisterIt()
 		{
 			var container = new Container();
-			var sut = new Shepherd(container);
+			var sut = new SimpleInjectorShepherd(container);
 
-			sut.AddCompleteTypeAssemblies(typeof(INoImplInterface).Assembly);
+			sut.Assemblies.Add(new AssemblyLoader(typeof(INoImplInterface).Assembly));
 
 			sut.Herd();
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ExistsForAll.Shepherd.SimpleInjector.Extensions;
+using ExistsForAll.Shepherd.Core.Extensions;
 using SimpleInjector;
 
 namespace ExistsForAll.Shepherd.SimpleInjector
