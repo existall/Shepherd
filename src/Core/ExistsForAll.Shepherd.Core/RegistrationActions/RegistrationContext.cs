@@ -9,6 +9,8 @@ namespace ExistsForAll.Shepherd.Core.RegistrationActions
 		public Type ServiceType { get; }
 		public IEnumerable<Type> ImplementationTypes { get; }
 		public IEnumerable<Assembly> Assemblies { get; }
+		
+		public Dictionary<string, object> Properties { get; }
 		public TContainer Container { get; }
 
 		public RegistrationContext(Type serviceType,
@@ -19,6 +21,7 @@ namespace ExistsForAll.Shepherd.Core.RegistrationActions
 			ImplementationTypes = implementationTypes;
 			Assemblies = assemblies;
 			Container = container;
+			Properties = new Dictionary<string, object>();
 		}
 	}
 }

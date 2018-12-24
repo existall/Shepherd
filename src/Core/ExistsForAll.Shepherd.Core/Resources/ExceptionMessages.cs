@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace ExistsForAll.Shepherd.Core.Resources
 {
-	internal static class ExceptionMessages
+	public static class ExceptionMessages
 	{
 		public const string SkipRegistrationMessage = @"RegistrationConstraintBehavior Attribute was not set for RegistrationConstraintBehavior in ShepheredOptions.
 An attribute type must be set in order for the current configuration.
