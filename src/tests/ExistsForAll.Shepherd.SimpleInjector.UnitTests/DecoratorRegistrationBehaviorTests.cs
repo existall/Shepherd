@@ -1,7 +1,7 @@
 ﻿using System;
-using ExistsForAll.Shepherd.SimpleInjector.RegistrationActions;
+using ExistsForAll.Shepherd.SimpleInjector.Depricated.RegistrationActions;
 using Xunit;
-using static ExistsForAll.Shepherd.SimpleInjector.UnitTests.TestUtils;
+using static ExistsForAll.Shepherd.SimpleInjector.Depricated.UnitTests.TestUtils;
 
 namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 {

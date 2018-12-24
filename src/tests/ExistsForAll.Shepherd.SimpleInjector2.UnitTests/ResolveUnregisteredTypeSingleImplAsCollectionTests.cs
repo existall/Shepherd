@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using ExistsForAll.Shepherd.SimpleInjector;
 using SimpleInjector;
 using Xunit;
 

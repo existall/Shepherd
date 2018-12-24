@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\ExistsForAll.Shepherd.Core\ExistsForAll.Shepherd.Core.csproj" />
-    <ProjectReference Include="..\..\Core\ExistsForAll.Shepherd.SimpleInjector.2\ExistsForAll.Shepherd.SimpleInjector.2.csproj" />
+    <ProjectReference Include="..\..\Core\ExistsForAll.Shepherd.SimpleInjector\ExistsForAll.Shepherd.SimpleInjector.csproj" />
     <ProjectReference Include="..\ExistsForAll.Shepherd.SimpleInjector.UnitTests.Subjects\ExistsForAll.Shepherd.SimpleInjector.UnitTests.Subjects.csproj" />
   </ItemGroup>
 

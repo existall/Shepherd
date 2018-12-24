@@ -1,5 +1,5 @@
 using System;
-using ExistsForAll.Shepherd.SimpleInjector.RegistrationActions;
+using ExistsForAll.Shepherd.SimpleInjector.Depricated.RegistrationActions;
 using Xunit;
 
 namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests

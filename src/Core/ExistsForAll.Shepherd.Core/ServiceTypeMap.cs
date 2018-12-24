@@ -14,10 +14,4 @@ namespace ExistsForAll.Shepherd.Core
 			ImplementationTypes = implementationTypes;
 		}
 	}
-
-	public interface IServiceTypeMap
-	{
-		Type ServiceType { get; }
-		IEnumerable<Type> ImplementationTypes { get; }
-	}
 }

@@ -1,8 +1,8 @@
 ﻿using System;
-using ExistsForAll.Shepherd.SimpleInjector.Builder;
-using ExistsForAll.Shepherd.SimpleInjector.Extensions;
-using ExistsForAll.Shepherd.SimpleInjector.Filters;
-using ExistsForAll.Shepherd.SimpleInjector.UnitTests.Subjects;
+using ExistsForAll.Shepherd.SimpleInjector.Depricated.Builder;
+using ExistsForAll.Shepherd.SimpleInjector.Depricated.Extensions;
+using ExistsForAll.Shepherd.SimpleInjector.Depricated.Filters;
+using ExistsForAll.Shepherd.SimpleInjector.Depricated.UnitTests.Subjects;
 using SimpleInjector;
 using Xunit;
 

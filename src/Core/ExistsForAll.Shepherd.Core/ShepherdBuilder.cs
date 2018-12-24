@@ -6,73 +6,6 @@ using ExistsForAll.Shepherd.Core.RegistrationActions;
 
 namespace ExistsForAll.Shepherd.Core
 {
-	public static class ShepherdBuilderExtensions
-	{
-		public static ShepherdBuilder<TContainer> WithAssembly<TContainer, T>(this ShepherdBuilder<TContainer> target)
-		{
-			var assembly = typeof(T).GetTypeInfo().Assembly;
-
-			target.WithAssemblies(x => x.AddAssemblies(assembly));
-
-			return target;
-		}
-		
-
-		public static ShepherdBuilder<TContainer> UseServiceIndexer<TContainer>(this ShepherdBuilder<TContainer> target, IServiceIndexer serviceIndexer)
-		{
-			target.WithOptions(x => x.ServiceIndexer = serviceIndexer);
-
-			return target;
-		}
-
-		public static ShepherdBuilder<TContainer> UseServiceIndexerFilter<TContainer>(this ShepherdBuilder<TContainer> target, IFilter filter)
-		{
-			target.WithOptions(x => x.ServiceIndexer.Filters.Add(filter));
-
-			return target;
-		}
-
-		public static ShepherdBuilder<TContainer> UseCollectionRegistrationBehavior<TContainer>(this ShepherdBuilder<TContainer> target,
-			ICollectionRegistrationBehavior<TContainer> behavior)
-		{
-			target.WithOptions(x => x.CollectionRegistrationBehavior = behavior);
-
-			return target;
-		}
-
-		public static ShepherdBuilder<TContainer> UseDecoratorRegistrationBehavior<TContainer>(this ShepherdBuilder<TContainer> target,
-			IDecoratorRegistrationBehavior<TContainer> behavior)
-		{
-			target.WithOptions(x => x.DecoratorRegistrationBehavior = behavior);
-
-			return target;
-		}
-
-		public static ShepherdBuilder<TContainer> UseGenericRegistrationBehavior<TContainer>(this ShepherdBuilder<TContainer> target,
-			IGenericRegistrationBehavior<TContainer> behavior)
-		{
-			target.WithOptions(x => x.GenericRegistrationBehavior = behavior);
-
-			return target;
-		}
-
-		public static ShepherdBuilder<TContainer> UseRegistrationConstraintBehavior<TContainer>(this ShepherdBuilder<TContainer> target,
-			IRegistrationConstraintBehavior behavior)
-		{
-			target.WithOptions(x => x.RegistrationConstraintBehavior = behavior);
-
-			return target;
-		}
-
-		public static ShepherdBuilder<TContainer> UseSingleServiceRegistrationBehavior<TContainer>(this ShepherdBuilder<TContainer> target,
-			ISingleServiceRegistrationBehavior<TContainer> behavior)
-		{
-			target.WithOptions(x => x.SingleServiceRegistrationBehavior = behavior);
-
-			return target;
-		}
-	}
-
 	public class ShepherdBuilder<TContainer>
 	{
 		private Shepherd<TContainer> Shepherd { get; }
@@ -97,6 +30,70 @@ namespace ExistsForAll.Shepherd.Core
 		public ShepherdBuilder<TContainer> WithModules(Action<ModuleCollection<TContainer>> action)
 		{
 			action?.Invoke(Shepherd.Modules);
+			return this;
+		}
+
+		public ShepherdBuilder<TContainer> WithAssembly<T>()
+		{
+			var assembly = typeof(T).GetTypeInfo().Assembly;
+
+			WithAssemblies(x => x.AddAssemblies(assembly));
+
+			return this;
+		}
+
+		public ShepherdBuilder<TContainer> WithModule(IModule<TContainer> module)
+		{
+			WithModules(x => x.AddModule(module));
+			return this;
+		}
+		
+		public ShepherdBuilder<TContainer> UseServiceIndexer(IServiceIndexer serviceIndexer)
+		{
+			WithOptions(x => x.ServiceIndexer = serviceIndexer);
+
+			return this;
+		}
+
+		public ShepherdBuilder<TContainer> UseServiceIndexerFilter(IFilter filter)
+		{
+			WithOptions(x => x.ServiceIndexer.Filters.Add(filter));
+
+			return this;
+		}
+
+		public ShepherdBuilder<TContainer> UseCollectionRegistrationBehavior(ICollectionRegistrationBehavior<TContainer> behavior)
+		{
+			WithOptions(x => x.CollectionRegistrationBehavior = behavior);
+
+			return this;
+		}
+
+		public ShepherdBuilder<TContainer> UseDecoratorRegistrationBehavior(IDecoratorRegistrationBehavior<TContainer> behavior)
+		{
+			WithOptions(x => x.DecoratorRegistrationBehavior = behavior);
+
+			return this;
+		}
+
+		public ShepherdBuilder<TContainer> UseGenericRegistrationBehavior(IGenericRegistrationBehavior<TContainer> behavior)
+		{
+			WithOptions(x => x.GenericRegistrationBehavior = behavior);
+
+			return this;
+		}
+
+		public ShepherdBuilder<TContainer> UseRegistrationConstraintBehavior(IRegistrationConstraintBehavior behavior)
+		{
+			WithOptions(x => x.RegistrationConstraintBehavior = behavior);
+
+			return this;
+		}
+
+		public ShepherdBuilder<TContainer> UseSingleServiceRegistrationBehavior(ISingleServiceRegistrationBehavior<TContainer> behavior)
+		{
+			WithOptions(x => x.SingleServiceRegistrationBehavior = behavior);
+
 			return this;
 		}
 	}

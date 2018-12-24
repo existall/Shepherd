@@ -10,8 +10,8 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Core\ExistsForAll.Shepherd.SimpleInjector.Depricated\ExistsForAll.Shepherd.SimpleInjector.Depricated.csproj" />
     <ProjectReference Include="..\..\Core\ExistsForAll.Shepherd.SimpleInjector.Experimental\ExistsForAll.Shepherd.SimpleInjector.Experimental.csproj" />
-    <ProjectReference Include="..\..\Core\ExistsForAll.Shepherd.SimpleInjector\ExistsForAll.Shepherd.SimpleInjector.csproj" />
     <ProjectReference Include="..\ExistsForAll.Shepherd.SimpleInjector.UnitTests.Subjects\ExistsForAll.Shepherd.SimpleInjector.UnitTests.Subjects.csproj" />
   </ItemGroup>
 </Project>

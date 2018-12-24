@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using ExistsForAll.Shepherd.SimpleInjector.RegistrationActions;
+using ExistsForAll.Shepherd.SimpleInjector.Depricated.RegistrationActions;
 
 namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 {
