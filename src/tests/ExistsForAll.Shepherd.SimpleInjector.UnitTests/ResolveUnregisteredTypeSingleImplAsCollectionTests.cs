@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using ExistsForAll.Shepherd.SimpleInjector;
 using SimpleInjector;
 using Xunit;
 
-namespace ExistsForAll.Shepherd.SimpleInjector2.UnitTests
+namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 {
 	public class ResolveUnregisteredTypeSingleImplAsCollectionTests
 	{

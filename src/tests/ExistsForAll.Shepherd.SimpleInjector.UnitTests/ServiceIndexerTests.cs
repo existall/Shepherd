@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Linq;
 using ExistsForAll.Shepherd.Core;
 using ExistsForAll.Shepherd.Core.Filters;
 using Xunit;
+using System.Linq;
 
-namespace ExistsForAll.Shepherd.SimpleInjector2.UnitTests
+namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 {
 	public partial class ServiceIndexerTests
 	{

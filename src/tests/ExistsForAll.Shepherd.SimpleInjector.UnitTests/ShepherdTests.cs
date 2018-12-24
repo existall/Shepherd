@@ -1,12 +1,11 @@
 ﻿using System;
 using ExistsForAll.Shepherd.Core;
 using ExistsForAll.Shepherd.Core.Filters;
-using ExistsForAll.Shepherd.SimpleInjector;
 using ExistsForAll.Shepherd.SimpleInjector.UnitTests.Subjects;
 using SimpleInjector;
 using Xunit;
 
-namespace ExistsForAll.Shepherd.SimpleInjector2.UnitTests
+namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 {
 	public class ShepherdTests
 	{

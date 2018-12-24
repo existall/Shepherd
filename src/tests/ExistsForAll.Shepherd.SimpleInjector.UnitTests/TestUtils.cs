@@ -2,7 +2,7 @@
 using System.Linq;
 using ExistsForAll.Shepherd.Core;
 
-namespace ExistsForAll.Shepherd.SimpleInjector2.UnitTests
+namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 {
 	internal static class TestUtils
 	{

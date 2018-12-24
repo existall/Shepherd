@@ -2,7 +2,7 @@
 using ExistsForAll.Shepherd.Core;
 using Xunit;
 
-namespace ExistsForAll.Shepherd.SimpleInjector2.UnitTests
+namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 {
 	public class RegistrationConstraintBehaviorTests
 	{
