@@ -15,13 +15,14 @@ namespace ExistsForAll.Shepherd.DependencyInjection.UnitTests
 		{
 			var sut = new ServiceCollection()
 			    .Scan(x => x.WithAssembly<INoImplInterface>()
-			        .WithOptions(o => o.ServiceIndexer.Filters.Add(new InterfaceAccumulationFilter(typeof(IFilterService)))));
+			        .WithOptions(o => o.ServiceIndexer
+				        .Filters
+				        .Add(new InterfaceAccumulationFilter(typeof(IFilterService)))));
 
 		    var provider = sut.BuildServiceProvider();
 
 		    try
 			{
-
 				AssertServiceRegistration<DecoratorServiceDecorator>(typeof(IDecoratorService), i =>
 				{
 					Assert.IsType<DecoratorServiceDecorator>(i);
