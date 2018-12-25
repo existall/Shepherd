@@ -32,23 +32,19 @@ namespace ExistsForAll.Shepherd.Core
 			}
 		}
 
-		private static void IterateActions(List<IRegistrationBehavior<TContainer>> actions,
+		private static void IterateActions(IEnumerable<IRegistrationBehavior<TContainer>> actions,
 			IServiceTypeMap serviceTypeMap,
 			TContainer container,
-			Assembly[] assemblies,
+			IEnumerable<Assembly> assemblies,
 			IShepherdOptions<TContainer> options)
 		{
 
 			var context = new RegistrationContext<TContainer>(serviceTypeMap.ServiceType,
 				serviceTypeMap.ImplementationTypes,
 				assemblies,
-				container);
+				container,
+				options);
 
-			foreach (var item in options.Items)
-			{
-				context.Properties.Add(item.Key, item.Value);
-			}
-			
 			foreach (var action in actions)
 			{
 				if (action.ShouldRegister(serviceTypeMap))

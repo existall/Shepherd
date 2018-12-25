@@ -10,18 +10,23 @@ namespace ExistsForAll.Shepherd.DependencyInjection.UnitTests
 {
     public class ShepherdTests
 	{
-		[Fact]
-		public void Herd_FullIntegrationTest()
+		[Theory]
+		[InlineData(ServiceLifetime.Transient)]
+		[InlineData(ServiceLifetime.Scoped)]
+		[InlineData(ServiceLifetime.Singleton)]
+		public void Herd_FullIntegrationTest(ServiceLifetime lifetime)
 		{
 			var sut = new ServiceCollection()
 			    .Scan(x => x.WithAssembly<INoImplInterface>()
-				    .SetDefaultLifetime(ServiceLifetime.Singleton)
+				    .SetDefaultLifetime(lifetime)
 			        .WithOptions(o => o.ServiceIndexer
 				        .Filters
-				        .Add(new InterfaceAccumulationFilter(typeof(IFilterService)))));
+				        .Add(new InterfaceAccumulationFilter(typeof(IFilterService)))
+				    )
+			    );
 
 		    var provider = sut.BuildServiceProvider();
-
+		    
 		    try
 			{
 				AssertServiceRegistration<DecoratorServiceDecorator>(typeof(IDecoratorService), i =>

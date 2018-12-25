@@ -8,7 +8,7 @@
         </Description>
         <Company>ExistsForAll</Company>
         <PackageProjectUrl>https://github.com/existall/Shepherd</PackageProjectUrl>
-        <PackageLicenseUrl>https://github.com/existall/Shepherd/blob/master/LICENSE</PackageLicenseUrl>
+        <License>https://github.com/existall/Shepherd/blob/master/LICENSE</License>
         <PackageIconUrl>https://raw.githubusercontent.com/existall/Shepherd/master/art/exitsForAll_icon.png</PackageIconUrl>
         <RepositoryUrl>https://github.com/existall/Shepherd</RepositoryUrl>
         <RepositoryType>GIT</RepositoryType>

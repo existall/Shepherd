@@ -9,7 +9,7 @@ namespace ExistsForAll.Shepherd.Core.RegistrationActions
 		Type ServiceType { get; }
 		IEnumerable<Type> ImplementationTypes { get; }
 		IEnumerable<Assembly> Assemblies { get; }
-		Dictionary<string, object> Properties { get; }
+		IReadOnlyDictionary<string, object> Properties { get; }
 	}
 	
 	public interface IRegistrationContext<out TContainer> : IRegistrationContext
