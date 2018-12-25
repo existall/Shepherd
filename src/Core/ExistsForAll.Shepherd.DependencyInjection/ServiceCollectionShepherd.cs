@@ -9,8 +9,7 @@ namespace ExistsForAll.Shepherd.DependencyInjection
 		public ServiceCollectionShepherd(IServiceCollection container)
 			: base(container)
 		{
-			
-			Options.Items.AddOrUpdate(RegistrationContextExtensions.DefaultLifeStyle, ServiceLifetime.Transient);
+			Options.Items.AddOrUpdate(Constants.DefaultLifeStyle, ServiceLifetime.Transient);
 		}
 
 		public sealed override IShepherdOptions<IServiceCollection> Options { get; protected set; } = new ServiceCollectionOptions();

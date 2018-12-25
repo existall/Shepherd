@@ -6,9 +6,10 @@ namespace ExistsForAll.Shepherd.DependencyInjection
 {
 	public static class ServiceCollectionBuilderExtensions
 	{
-		public static ShepherdBuilder<IServiceCollection> SetDefaultLifetime(this ShepherdBuilder<IServiceCollection> target, ServiceLifetime serviceLifetime)
+		public static ShepherdBuilder<IServiceCollection> SetDefaultLifetime(this ShepherdBuilder<IServiceCollection> target,
+			ServiceLifetime serviceLifetime)
 		{
-			target.WithOptions(x => x.Items.AddOrUpdate(RegistrationContextExtensions.DefaultLifeStyle, serviceLifetime));
+			target.WithOptions(x => x.Items.AddOrUpdate(Constants.DefaultLifeStyle, serviceLifetime));
 			return target;
 		}
 	}
