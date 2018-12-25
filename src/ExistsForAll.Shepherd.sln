@@ -4,6 +4,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{6DC390AF-9ACA-415F-AD84-2C83ACCC026B}"
+ProjectSection(SolutionItems) = preProject
+	build.cake = build.cake
+	properties.props = properties.props
+EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{438B970D-B358-4808-B300-06E751728CDA}"
 EndProject
