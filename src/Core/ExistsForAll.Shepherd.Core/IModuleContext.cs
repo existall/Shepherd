@@ -9,5 +9,6 @@ namespace ExistsForAll.Shepherd.Core
 		IEnumerable<Assembly> Assemblies { get; }
 		IEnumerable<Type> Types { get; }
 		TContainer Container { get; }
+		IReadOnlyDictionary<string,object> Properties { get; }
 	}
 }

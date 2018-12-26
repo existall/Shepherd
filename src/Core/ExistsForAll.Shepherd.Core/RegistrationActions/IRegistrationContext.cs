@@ -4,11 +4,16 @@ using System.Reflection;
 
 namespace ExistsForAll.Shepherd.Core.RegistrationActions
 {
-	public interface IRegistrationContext<out TContainer>
+	public interface IRegistrationContext
 	{
-		TContainer Container { get; }
 		Type ServiceType { get; }
 		IEnumerable<Type> ImplementationTypes { get; }
 		IEnumerable<Assembly> Assemblies { get; }
+		IReadOnlyDictionary<string, object> Properties { get; }
+	}
+	
+	public interface IRegistrationContext<out TContainer> : IRegistrationContext
+	{
+		TContainer Container { get; }
 	}
 }

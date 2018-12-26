@@ -45,7 +45,7 @@ namespace ExistsForAll.Shepherd.Core
 
 			_autoRegistrationBehavior.Register(Container, Options, typeIndex, assemblies);
 
-			_modulesExecutor.ExecuteModules(Modules, Container, assemblies, allTypes);
+			_modulesExecutor.ExecuteModules(Modules, Container, assemblies, allTypes, Options);
 		}
 	}
 }

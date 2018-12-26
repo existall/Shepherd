@@ -1,6 +1,7 @@
 ﻿using System;
 using ExistsForAll.Shepherd.Core;
 using SimpleInjector;
+using SimpleInjector.Advanced;
 
 namespace ExistsForAll.Shepherd.SimpleInjector
 {

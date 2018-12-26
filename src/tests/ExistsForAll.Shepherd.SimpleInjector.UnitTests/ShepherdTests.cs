@@ -74,7 +74,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 				new RegistrationConstraintBehavior() {AttributeType = typeof(SkipRegistrationTestAttribute)};
 			sut.Assemblies.Add(new AssemblyLoader(typeof(INoImplInterface).Assembly));
 			sut.Herd();
-			
+
 			Assert.Throws<ActivationException>(() => container.GetInstance<IInterfaceWithAttribute>());
 		}
 
@@ -91,7 +91,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 			sut.Herd();
 
 			var result = container.GetInstance<IInterfaceWithAttribute>();
-			
+
 			Assert.IsType<InterfaceWithAttribute>(result);
 		}
 
@@ -132,7 +132,7 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 					i => Assert.IsType<CollectionService2>(i),
 					i => Assert.IsType<CollectionService3>(i));
 
-				Assert.Throws<ActivationException>(() => container.GetInstance<ICollectionService>()); 
+				Assert.Throws<ActivationException>(() => container.GetInstance<ICollectionService>());
 
 				NotRegisteredAssertion(typeof(IFilterService));
 				NotRegisteredAssertion(typeof(INoImplInterface));
@@ -154,20 +154,20 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 				Assert.Throws<ActivationException>(() => container.GetInstance(type));
 			}
 		}
-		
+
 		[Fact]
 		public void Herd_WhenRequestingCollectionAndOnlyOneImpl_ShouldRegisterIt()
 		{
 			var container = new Container();
 			container.AddSingleAsCollectionSupport();
 			var sut = new SimpleInjectorShepherd(container);
-			
+
 			sut.Assemblies.Add(new AssemblyLoader(typeof(INoImplInterface).Assembly));
-			
+
 			sut.Herd();
-			
+
 			var result = container.GetInstance<ISingleTypeCollectionHolder>();
-			
+
 			Assert.Single(result.Collection);
 		}
 
@@ -184,6 +184,27 @@ namespace ExistsForAll.Shepherd.SimpleInjector.UnitTests
 			var result = container.GetInstance<ISingleTypeCollectionHolder>();
 
 			Assert.Single(result.Collection);
+		}
+
+		[Fact]
+		public void Herd_WhenPassingProperties_ShouldBeAvailableInContext()
+		{
+			var container = new Container()
+				.Scan(x => x.WithAssembly<INoImplInterface>()
+					.AddOrUpdateProperty(TestModule.PropertyName, TestModule.PropertyValue)
+					.WithModule(new TestModule()));
+		}
+
+		private class TestModule : IModule<Container>
+		{
+			public const string PropertyName = "some-name";
+			public static readonly Guid PropertyValue = Guid.NewGuid();
+
+			public void Configure(IModuleContext<Container> context)
+			{
+				context.Properties.TryGetValue(PropertyName, out var value);
+				Assert.Equal(PropertyValue, value);
+			}
 		}
 	}
 }

@@ -4,12 +4,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{6DC390AF-9ACA-415F-AD84-2C83ACCC026B}"
+ProjectSection(SolutionItems) = preProject
+	build.cake = build.cake
+	properties.props = properties.props
+EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{438B970D-B358-4808-B300-06E751728CDA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A0EB46E4-DBE5-47F8-BFB7-6AACB3AD88B4}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExistsForAll.Shepherd.SimpleInjector.Experimental", "Core\ExistsForAll.Shepherd.SimpleInjector.Experimental\ExistsForAll.Shepherd.SimpleInjector.Experimental.csproj", "{AF23FAFE-4412-4F79-8DE8-BAB598A36C2E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExistsForAll.Shepherd.SimpleInjector.UnitTests.Subjects", "tests\ExistsForAll.Shepherd.SimpleInjector.UnitTests.Subjects\ExistsForAll.Shepherd.SimpleInjector.UnitTests.Subjects.csproj", "{8CB875CE-6752-41CA-87BB-10576F5F3E18}"
 EndProject
@@ -19,16 +21,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExistsForAll.Shepherd.Simpl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExistsForAll.Shepherd.SimpleInjector.UnitTests", "tests\ExistsForAll.Shepherd.SimpleInjector.UnitTests\ExistsForAll.Shepherd.SimpleInjector.UnitTests.csproj", "{1EBA1A76-59F7-4F81-A1CA-D7097F4CC27A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExistsForAll.Shepherd.DependencyInjection", "Core\ExistsForAll.Shepherd.DependencyInjection\ExistsForAll.Shepherd.DependencyInjection.csproj", "{7A1B398A-8133-4E2E-A49A-F2C2C5B565E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExistsForAll.Shepherd.DependencyInjection.UnitTests", "tests\ExistsForAll.Shepherd.DependencyInjection.UnitTests\ExistsForAll.Shepherd.DependencyInjection.UnitTests.csproj", "{B1755CFB-ABE0-4516-A91E-D63299D47B4A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AF23FAFE-4412-4F79-8DE8-BAB598A36C2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AF23FAFE-4412-4F79-8DE8-BAB598A36C2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AF23FAFE-4412-4F79-8DE8-BAB598A36C2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AF23FAFE-4412-4F79-8DE8-BAB598A36C2E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8CB875CE-6752-41CA-87BB-10576F5F3E18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8CB875CE-6752-41CA-87BB-10576F5F3E18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CB875CE-6752-41CA-87BB-10576F5F3E18}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,16 +47,25 @@ Global
 		{1EBA1A76-59F7-4F81-A1CA-D7097F4CC27A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1EBA1A76-59F7-4F81-A1CA-D7097F4CC27A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1EBA1A76-59F7-4F81-A1CA-D7097F4CC27A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A1B398A-8133-4E2E-A49A-F2C2C5B565E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A1B398A-8133-4E2E-A49A-F2C2C5B565E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A1B398A-8133-4E2E-A49A-F2C2C5B565E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A1B398A-8133-4E2E-A49A-F2C2C5B565E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1755CFB-ABE0-4516-A91E-D63299D47B4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1755CFB-ABE0-4516-A91E-D63299D47B4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1755CFB-ABE0-4516-A91E-D63299D47B4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1755CFB-ABE0-4516-A91E-D63299D47B4A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{AF23FAFE-4412-4F79-8DE8-BAB598A36C2E} = {438B970D-B358-4808-B300-06E751728CDA}
 		{8CB875CE-6752-41CA-87BB-10576F5F3E18} = {A0EB46E4-DBE5-47F8-BFB7-6AACB3AD88B4}
 		{19701B81-7DE2-46AC-A454-5F5F899DDA17} = {438B970D-B358-4808-B300-06E751728CDA}
 		{53B88B15-95F7-4CCC-876E-63A07F819C83} = {438B970D-B358-4808-B300-06E751728CDA}
 		{1EBA1A76-59F7-4F81-A1CA-D7097F4CC27A} = {A0EB46E4-DBE5-47F8-BFB7-6AACB3AD88B4}
+		{7A1B398A-8133-4E2E-A49A-F2C2C5B565E2} = {438B970D-B358-4808-B300-06E751728CDA}
+		{B1755CFB-ABE0-4516-A91E-D63299D47B4A} = {A0EB46E4-DBE5-47F8-BFB7-6AACB3AD88B4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8616ED98-2EF3-4147-8359-D19461B35672}

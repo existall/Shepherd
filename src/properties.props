@@ -1,0 +1,17 @@
+<Project>
+    <PropertyGroup>
+        <Version>3.0.0</Version>
+        <Authors>Guy Ludvig</Authors>
+        <Description>Shepherd is a highly extendable orchestrator pattern wrapping SimpleInjector in order to help register tasks more easily.
+            Shepherd out of the box help auto-register domain service and create modules for infrastructure registration.
+            Shepered can act as the application Composition Root.
+        </Description>
+        <Company>ExistsForAll</Company>
+        <PackageProjectUrl>https://github.com/existall/Shepherd</PackageProjectUrl>
+        <License>https://github.com/existall/Shepherd/blob/master/LICENSE</License>
+        <PackageIconUrl>https://raw.githubusercontent.com/existall/Shepherd/master/art/exitsForAll_icon.png</PackageIconUrl>
+        <RepositoryUrl>https://github.com/existall/Shepherd</RepositoryUrl>
+        <RepositoryType>GIT</RepositoryType>
+        <PackageTags>SimpleInjector Ioc ExistAll ExistsForAll Orchestration</PackageTags>
+    </PropertyGroup>
+</Project>

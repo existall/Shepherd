@@ -1,4 +1,5 @@
-﻿using ExistsForAll.Shepherd.Core.RegistrationActions;
+﻿using System.Collections.Generic;
+using ExistsForAll.Shepherd.Core.RegistrationActions;
 
 namespace ExistsForAll.Shepherd.Core
 {
@@ -10,5 +11,6 @@ namespace ExistsForAll.Shepherd.Core
 		IDecoratorRegistrationBehavior<TContainer> DecoratorRegistrationBehavior { get; set; }
 		ICollectionRegistrationBehavior<TContainer> CollectionRegistrationBehavior { get; set; }
 		ISingleServiceRegistrationBehavior<TContainer> SingleServiceRegistrationBehavior { get; set; }
+		IDictionary<string, object> Items { get; }
 	}
 }

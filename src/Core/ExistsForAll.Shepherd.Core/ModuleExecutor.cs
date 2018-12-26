@@ -1,13 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace ExistsForAll.Shepherd.Core
 {
 	internal class ModuleExecutor<TContainer> : IModulesExecutor<TContainer>
 	{
-		public void ExecuteModules(ModuleCollection<TContainer> modules, TContainer container, Assembly[] assemblies, Type[] types)
+		public void ExecuteModules(ModuleCollection<TContainer> modules, TContainer container, IEnumerable<Assembly> assemblies, IEnumerable<Type> types,
+			IShepherdOptions<TContainer> options)
 		{
-			var context = new ModuleContext<TContainer>(assemblies, types, container);
+			var context = new ModuleContext<TContainer>(assemblies, types, container, options);
 
 			foreach (var module in modules)
 			{
