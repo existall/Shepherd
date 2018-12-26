@@ -44,7 +44,9 @@ Task("Restore")
     .IsDependentOn("Restore")
     .Does(() =>
     {
-        var projects = GetFiles("./{Core,tests}}/*.csproj");
+        var projects = new List<FilePath>();
+        projects.AddRange(GetFiles("./Core/**/*.csproj"));
+		projects.AddRange(GetFiles("./tests/**/*.csproj"));
         foreach(var project in projects)
         {
             DotNetCoreBuild(
