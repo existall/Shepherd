@@ -47,7 +47,7 @@ namespace ExistsForAll.Shepherd.Core
 			WithModules(x => x.AddModule(module));
 			return this;
 		}
-		
+
 		public ShepherdBuilder<TContainer> UseServiceIndexer(IServiceIndexer serviceIndexer)
 		{
 			WithOptions(x => x.ServiceIndexer = serviceIndexer);
@@ -62,21 +62,24 @@ namespace ExistsForAll.Shepherd.Core
 			return this;
 		}
 
-		public ShepherdBuilder<TContainer> UseCollectionRegistrationBehavior(ICollectionRegistrationBehavior<TContainer> behavior)
+		public ShepherdBuilder<TContainer> UseCollectionRegistrationBehavior(
+			ICollectionRegistrationBehavior<TContainer> behavior)
 		{
 			WithOptions(x => x.CollectionRegistrationBehavior = behavior);
 
 			return this;
 		}
 
-		public ShepherdBuilder<TContainer> UseDecoratorRegistrationBehavior(IDecoratorRegistrationBehavior<TContainer> behavior)
+		public ShepherdBuilder<TContainer> UseDecoratorRegistrationBehavior(
+			IDecoratorRegistrationBehavior<TContainer> behavior)
 		{
 			WithOptions(x => x.DecoratorRegistrationBehavior = behavior);
 
 			return this;
 		}
 
-		public ShepherdBuilder<TContainer> UseGenericRegistrationBehavior(IGenericRegistrationBehavior<TContainer> behavior)
+		public ShepherdBuilder<TContainer> UseGenericRegistrationBehavior(
+			IGenericRegistrationBehavior<TContainer> behavior)
 		{
 			WithOptions(x => x.GenericRegistrationBehavior = behavior);
 
@@ -90,11 +93,19 @@ namespace ExistsForAll.Shepherd.Core
 			return this;
 		}
 
-		public ShepherdBuilder<TContainer> UseSingleServiceRegistrationBehavior(ISingleServiceRegistrationBehavior<TContainer> behavior)
+		public ShepherdBuilder<TContainer> UseSingleServiceRegistrationBehavior(
+			ISingleServiceRegistrationBehavior<TContainer> behavior)
 		{
 			WithOptions(x => x.SingleServiceRegistrationBehavior = behavior);
 
 			return this;
 		}
+
+		public ShepherdBuilder<TContainer> AddOrUpdateProperty(string key, object value)
+		{
+			WithOptions(x => x.Items.AddOrUpdate(key, value));
+			return this;
+		}
 	}
 }
+
