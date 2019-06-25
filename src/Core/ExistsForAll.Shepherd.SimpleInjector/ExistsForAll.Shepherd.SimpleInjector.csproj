@@ -4,13 +4,13 @@
     <TargetFramework>netstandard1.5</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="SimpleInjector" Version="4.4.2" />
+    <PackageReference Include="SimpleInjector" Version="4.6.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ExistsForAll.Shepherd.Core\ExistsForAll.Shepherd.Core.csproj" />
   </ItemGroup>
 
-  <Import Project="../../properties.props"/>
+  <Import Project="../../properties.props" />
 
 </Project>
