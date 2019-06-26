@@ -290,3 +290,4 @@ __pycache__/
 
 /tools
 /src/.vscode/
+/src/params.txt
