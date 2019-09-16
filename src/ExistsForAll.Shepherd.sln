@@ -1,13 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27004.2005
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29009.5
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{6DC390AF-9ACA-415F-AD84-2C83ACCC026B}"
-ProjectSection(SolutionItems) = preProject
-	build.cake = build.cake
-	properties.props = properties.props
-EndProjectSection
+	ProjectSection(SolutionItems) = preProject
+		build.bat = build.bat
+		build.cake = build.cake
+		properties.props = properties.props
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{438B970D-B358-4808-B300-06E751728CDA}"
 EndProject
@@ -17,13 +18,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExistsForAll.Shepherd.Simpl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExistsForAll.Shepherd.Core", "Core\ExistsForAll.Shepherd.Core\ExistsForAll.Shepherd.Core.csproj", "{19701B81-7DE2-46AC-A454-5F5F899DDA17}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExistsForAll.Shepherd.SimpleInjector", "Core\ExistsForAll.Shepherd.SimpleInjector\ExistsForAll.Shepherd.SimpleInjector.csproj", "{53B88B15-95F7-4CCC-876E-63A07F819C83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExistsForAll.Shepherd.SimpleInjector", "Core\ExistsForAll.Shepherd.SimpleInjector\ExistsForAll.Shepherd.SimpleInjector.csproj", "{53B88B15-95F7-4CCC-876E-63A07F819C83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExistsForAll.Shepherd.SimpleInjector.UnitTests", "tests\ExistsForAll.Shepherd.SimpleInjector.UnitTests\ExistsForAll.Shepherd.SimpleInjector.UnitTests.csproj", "{1EBA1A76-59F7-4F81-A1CA-D7097F4CC27A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExistsForAll.Shepherd.SimpleInjector.UnitTests", "tests\ExistsForAll.Shepherd.SimpleInjector.UnitTests\ExistsForAll.Shepherd.SimpleInjector.UnitTests.csproj", "{1EBA1A76-59F7-4F81-A1CA-D7097F4CC27A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExistsForAll.Shepherd.DependencyInjection", "Core\ExistsForAll.Shepherd.DependencyInjection\ExistsForAll.Shepherd.DependencyInjection.csproj", "{7A1B398A-8133-4E2E-A49A-F2C2C5B565E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExistsForAll.Shepherd.DependencyInjection", "Core\ExistsForAll.Shepherd.DependencyInjection\ExistsForAll.Shepherd.DependencyInjection.csproj", "{7A1B398A-8133-4E2E-A49A-F2C2C5B565E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExistsForAll.Shepherd.DependencyInjection.UnitTests", "tests\ExistsForAll.Shepherd.DependencyInjection.UnitTests\ExistsForAll.Shepherd.DependencyInjection.UnitTests.csproj", "{B1755CFB-ABE0-4516-A91E-D63299D47B4A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExistsForAll.Shepherd.DependencyInjection.UnitTests", "tests\ExistsForAll.Shepherd.DependencyInjection.UnitTests\ExistsForAll.Shepherd.DependencyInjection.UnitTests.csproj", "{B1755CFB-ABE0-4516-A91E-D63299D47B4A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
