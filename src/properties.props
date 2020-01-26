@@ -1,6 +1,6 @@
 <Project>
     <PropertyGroup>
-        <Version>3.2.0</Version>
+        <Version>3.3.0</Version>
         <Authors>Guy Ludvig</Authors>
         <Description>Shepherd is a highly extendable orchestrator pattern wrapping (SimpleInjector / Microsoft Dependency Injection) in order to help register tasks more easily.
             Shepherd out of the box help auto-register domain service and create modules for infrastructure registration.
